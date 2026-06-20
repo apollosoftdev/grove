@@ -1,0 +1,81 @@
+import Link from "next/link";
+
+import { LogoutButton } from "@/components/logout-button";
+import { requireUser } from "@/lib/guards";
+
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const session = await requireUser();
+  const { error } = await searchParams;
+  const isAdmin = session.user.role === "ADMIN";
+
+  return (
+    <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
+      <header className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Dashboard
+          </h1>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Signed in as {session.user.email}
+          </p>
+        </div>
+        <LogoutButton />
+      </header>
+
+      {error === "forbidden" && (
+        <div className="mb-6 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
+          You don&apos;t have permission to access that page.
+        </div>
+      )}
+
+      <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+          Your account
+        </h2>
+        <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <dt className="text-xs text-gray-500 dark:text-gray-400">Name</dt>
+            <dd className="text-sm text-gray-900 dark:text-gray-100">
+              {session.user.name ?? "—"}
+            </dd>
+          </div>
+          <div>
+            <dt className="text-xs text-gray-500 dark:text-gray-400">Email</dt>
+            <dd className="text-sm text-gray-900 dark:text-gray-100">
+              {session.user.email}
+            </dd>
+          </div>
+          <div>
+            <dt className="text-xs text-gray-500 dark:text-gray-400">Role</dt>
+            <dd>
+              <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                {session.user.role}
+              </span>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      {isAdmin && (
+        <section className="mt-6 rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            Admin
+          </h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            You have administrator access.
+          </p>
+          <Link
+            href="/admin"
+            className="mt-4 inline-flex rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+          >
+            Open admin panel
+          </Link>
+        </section>
+      )}
+    </main>
+  );
+}
