@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { LogoutButton } from "@/components/logout-button";
 import { requireUser } from "@/lib/guards";
 
 export default async function DashboardPage({
@@ -13,21 +12,18 @@ export default async function DashboardPage({
   const isAdmin = session.user.role === "ADMIN";
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
-      <header className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Dashboard
-          </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Signed in as {session.user.email}
-          </p>
-        </div>
-        <LogoutButton />
-      </header>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Overview
+        </h1>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Welcome back, {session.user.name ?? session.user.email}.
+        </p>
+      </div>
 
       {error === "forbidden" && (
-        <div className="mb-6 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
+        <div className="rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
           You don&apos;t have permission to access that page.
         </div>
       )}
@@ -61,7 +57,7 @@ export default async function DashboardPage({
       </section>
 
       {isAdmin && (
-        <section className="mt-6 rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
             Admin
           </h2>
@@ -76,6 +72,6 @@ export default async function DashboardPage({
           </Link>
         </section>
       )}
-    </main>
+    </div>
   );
 }

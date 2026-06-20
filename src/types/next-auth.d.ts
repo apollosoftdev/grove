@@ -16,7 +16,9 @@ declare module "next-auth" {
   }
 }
 
-declare module "next-auth/jwt" {
+// The JWT interface lives in @auth/core/jwt; next-auth/jwt only re-exports it,
+// so augmenting it here is what actually merges with the real type.
+declare module "@auth/core/jwt" {
   interface JWT {
     id: string;
     role: Role;
