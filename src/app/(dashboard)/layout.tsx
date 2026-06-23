@@ -20,7 +20,6 @@ export default async function DashboardLayout({
         <aside className="border-b border-black/10 md:w-56 md:shrink-0 md:border-b-0 md:border-r dark:border-white/10">
           <DashboardSidebar isAdmin={isAdmin} />
         </aside>
-
         <main className="flex-1 px-6 py-8">{children}</main>
       </div>
 
