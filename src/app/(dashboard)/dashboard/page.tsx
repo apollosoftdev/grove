@@ -1,19 +1,5 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/guards";
-import UserProductsPage from "@/components/products/user-products";
-import { Product } from "@/generated/prisma/client";
-
-interface Products {
-  id: string,
-  name: string,
-  property: string,
-  image: string,
-  utility: string,
-  price: number,
-  rating: string,
-  comment: string,
-}
 
 export default async function productlist({
   searchParams,
@@ -25,15 +11,6 @@ export default async function productlist({
   const { error } = await searchParams;
   const isAdmin = session.user.role === "ADMIN";
 
-  const products_list = await prisma.product.findMany({select: {
-
-    id: true, 
-    name: true,
-    property: true,
-    image: true,
-    utility: true,
-    price: true,
-  }});
 
   return (
     <div className="space-y-6">
@@ -79,10 +56,6 @@ export default async function productlist({
           </div>
         </dl>
       </section>
-      {!isAdmin && (
-        <UserProductsPage products={products_list || []} />
-      )
-      }
       {isAdmin && (
         <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
