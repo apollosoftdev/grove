@@ -4,6 +4,12 @@
 type Product = {
   id: string;
   name: string;
+  property: string;
+  image: string;
+  utility: string;
+  price: string
+  rating: string;
+  comment: string;
 };
 
 // 2. Define the props object structure
@@ -26,34 +32,54 @@ export default function UserProductPage({ products }: ProductListProps) {
       </div>
 
       <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="border-b border-black/10 bg-black/[0.02] text-xs uppercase tracking-wide text-gray-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
-              <tr>
-                <th className="px-4 py-3 font-medium">#</th>
-                <th className="px-4 py-3 font-medium">Image</th>
-                <th className="px-4 py-3 font-medium">Name</th>
-                <th className="px-4 py-3 font-medium">Property</th>
-                <th className="px-4 py-3 font-medium">Utility</th>
-                <th className="px-4 py-3 font-medium">Price</th>
-                <th className="px-4 py-3 font-medium">Created At</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-black/5 dark:divide-white/5">
-              {products.map((product, index) => (
-                <tr key={product.id}>
-                  <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
-                      {index + 1}
+        <div className="overflow-x-auto grid grid-cols-3">
+          {products.map((product ) => (
+            <article
+                key={product.id}
+                className="w-[300px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
+              >
+                <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
+                  <img
+                    src={product.image}
+                    alt=""
+                    className="object-cover bg-green-100"
+                    sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
+                  />
+                  <span
+                    className="absolute bottom-3 left-3 z-10 max-w-[calc(100%-1.5rem)] truncate rounded-md px-2 py-1 text-[9px] font-bold uppercase tracking-wide lg:bottom-auto lg:left-auto lg:right-3 lg:top-3 lg:max-w-none lg:rounded-full lg:px-3 lg:py-1 lg:text-[10px]"
+                  >
+
+                  </span>
+                </div>
+                <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                  <div>
+                    <p className="pt-3 pl-5 font-spartan text-2xl font-bold text-blue-600">
+                      ${product.price}
+                    </p>
+                    <p className="pt-3 pl-5 text-md text-neutral-500">
+                    · {product.property}
+                    </p>
+                  </div>
+                  <h3 className="pt-3 pl-5 truncate text-2xl font-bold leading-snug text-onyx">
+                    {product.name}
+                  </h3>
+                  <div className="pt-3 pl-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
+                    <span className="inline-flex items-center gap-1">
+                      {product.utility}
                     </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
-                    {product.name ?? "-"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                  <div className="flex justify-end items-center gap-3">
+                    <button
+                      type="button"
+                      className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600"
+                      aria-label="Save to favorites"
+                    >
+                      +favourite
+                    </button>
+                  </div>
+                </div>
+              </article>  
+          ))}
         </div>
       </div>
     </div>

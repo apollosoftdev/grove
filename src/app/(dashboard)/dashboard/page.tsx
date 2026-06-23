@@ -18,7 +18,15 @@ export default async function productlist({
   const { error } = await searchParams;
   const isAdmin = session.user.role === "ADMIN";
 
-  const products = await prisma.product.findMany({select: { id: true, name: true}});
+  const products = await prisma.product.findMany({select: { 
+                id: true, 
+                name: true,
+                property: true,
+                image: true,
+                utility: true,
+                price: true,
+                rating: true,
+                comment: true,}});
 
   return (
     <div className="space-y-6">

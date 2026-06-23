@@ -6,7 +6,13 @@ export async function GET(){
         const products = await prisma.product.findMany({
             select: {
                 id: true,
-                name: true
+                name: true,
+                property: true,
+                image: true,
+                utility: true,
+                price: true,
+                rating: true,
+                comment: true,
             }
         });
         return NextResponse.json({ products });
