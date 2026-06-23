@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/guards";
-import UserProductPage from "@/components/products/user-products";
+import UserProductsPage from "@/components/products/user-products";
 import { Product } from "@/generated/prisma/client";
 
 interface Products {
@@ -80,7 +80,7 @@ export default async function productlist({
         </dl>
       </section>
       {!isAdmin && (
-        <UserProductPage products={products_list || []} />
+        <UserProductsPage products={products_list || []} />
       )
       }
       {isAdmin && (

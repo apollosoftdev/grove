@@ -15,7 +15,7 @@ interface ProductListProps {
   products: Product[];
 }
 
-export default function UserProductPage({ products }: ProductListProps) {
+export default function UserProductsPage({ products }: ProductListProps) {
   return (
     <div className="space-y-6">
       <div>
