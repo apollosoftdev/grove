@@ -70,6 +70,12 @@ export default async function productlist({
           >
             Open admin panel
           </Link>
+          <Link
+            href="/admin/createproducts"
+            className="mt-4 inline-flex rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+          >
+            Create Products
+          </Link>
         </section>
       )}
     </div>
