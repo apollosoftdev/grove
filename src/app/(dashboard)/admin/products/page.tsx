@@ -1,3 +1,5 @@
+// "use client"
+
 import { requireAdmin } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 // import { useActionState } from "react";

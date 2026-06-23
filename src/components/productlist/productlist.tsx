@@ -1,23 +1,28 @@
-import { requireUser } from "@/lib/guards";
-import { prisma } from "@/lib/prisma";
+'use client';
 
-export default async function UserProductPage() {
-  // Authoritative server-side authorization — admins only.
-  await requireUser();
+// 1. Define the shape of a single product
+type Product = {
+  id: string;
+  name: string;
+};
 
-  const products = await prisma.product.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+// 2. Define the props object structure
+interface ProductListProps {
+  products: Product[];
+}
 
+export default function UserProductPage({ products }: ProductListProps) {
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
           Products list
         </h1>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {products.length} registered {products.length === 1 ? "product" : "products"}
-        </p>
+        {products &&
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {products.length} registered {products.length === 1 ? "product" : "products"}
+          </p>
+        }
       </div>
 
       <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
@@ -42,32 +47,8 @@ export default async function UserProductPage() {
                       {index + 1}
                     </span>
                   </td>
-                  <td className="px-4 py-3">
-                    {product.image ?
-                      <img className="size-6" src={product.image} /> :
-                      <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200 text-lg">
-                        {product.name[0]}
-                      </span>
-                    }
-                  </td>
                   <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
                     {product.name ?? "-"}
-                  </td>
-                  <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
-                    {product.property ?? "-"}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
-                      {product.utility ?? "-"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
-                      {product.price ?? 0}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
-                    {product.createdAt.toLocaleDateString()}
                   </td>
                 </tr>
               ))}
