@@ -5,11 +5,9 @@ type Product = {
   id: string;
   name: string;
   property: string;
-  image: string;
-  utility: string;
-  price: string
-  rating: string;
-  comment: string;
+  image: string | null;
+  utility: string | null;
+  price: number;
 };
 
 // 2. Define the props object structure
@@ -33,14 +31,14 @@ export default function UserProductPage({ products }: ProductListProps) {
 
       <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
         <div className="overflow-x-auto grid grid-cols-3">
-          {products.map((product ) => (
+          {products.map((product) => (
             <article
                 key={product.id}
                 className="w-[300px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
               >
                 <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
                   <img
-                    src={product.image}
+                    src={product.image?? ""}
                     alt=""
                     className="object-cover bg-green-100"
                     sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
