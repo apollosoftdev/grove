@@ -1,15 +1,16 @@
 import Link from "next/link";
-
 import { requireUser } from "@/lib/guards";
 
-export default async function DashboardPage({
+export default async function productlist({
   searchParams,
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
+
   const session = await requireUser();
   const { error } = await searchParams;
   const isAdmin = session.user.role === "ADMIN";
+
 
   return (
     <div className="space-y-6">
@@ -55,7 +56,6 @@ export default async function DashboardPage({
           </div>
         </dl>
       </section>
-
       {isAdmin && (
         <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
@@ -65,7 +65,7 @@ export default async function DashboardPage({
             You have administrator access.
           </p>
           <Link
-            href="/admin"
+            href="/admin/products"
             className="mt-4 inline-flex rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
             Open admin panel
