@@ -18,5 +18,32 @@ export const registerSchema = z.object({
     .max(100, "Password is too long"),
 });
 
+export const productSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Name must be at least 2 characters")
+    .max(80, "Name is too long"),
+  property: z
+    .string()
+    .trim()
+    .min(2, "Property must be at least 2 characters")
+    .max(80, "Property is too long"),
+  utility: z
+    .string()
+    .trim()
+    .min(2, "Utility must be at least 2 characters")
+    .max(80, "Utility is too long"),
+  price: z
+    .coerce.number()
+    .min(0, "Price must be a positive number"),
+  image: z.string().url("Enter a valid image URL"),
+  createdAt: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Enter a valid date",
+  }),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
+export type ProductInput = z.infer<typeof productSchema>;
+
