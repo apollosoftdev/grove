@@ -69,7 +69,7 @@ export default async function productlist({
             href="/admin/products"
             className="mt-4 inline-flex rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
-            Open admin panel
+            Product CardShop
           </Link>
           <Link
             href="/admin/products/create"

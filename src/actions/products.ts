@@ -14,7 +14,7 @@ export type ProductFormState = {
   fieldErrors?: Record<string, string[] | undefined>;
 };
 
-export async function createPost(
+export async function createProduct(
   _prevState: ProductFormState,
   formData: FormData,
 ): Promise<ProductFormState> {

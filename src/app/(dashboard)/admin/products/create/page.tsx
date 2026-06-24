@@ -1,7 +1,7 @@
 "use client";
 
 
-import { createPost, type ProductFormState } from "@/actions/products";
+import { createProduct, type ProductFormState } from "@/actions/products";
 import { useActionState } from "react";
 
 function SubmitButton({ pending, label }: { pending: boolean; label: string }) {
@@ -35,7 +35,7 @@ const initialState : ProductFormState= {
 
 export default function createProductPage() {
 
-  const [state, formAction, pending] = useActionState(createPost, initialState);
+  const [state, formAction, pending] = useActionState(createProduct, initialState);
 
   return (
     <>
