@@ -64,18 +64,20 @@ export default async function productlist({
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
             You have administrator access.
           </p>
-          <Link
+          <div className="flex justify-between">
+            <Link
             href="/admin/products"
             className="mt-4 inline-flex rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
             Open admin panel
           </Link>
           <Link
-            href="/admin/createproducts"
+            href="/admin/products/create"
             className="mt-4 inline-flex rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
             Create Products
           </Link>
+          </div>
         </section>
       )}
     </div>

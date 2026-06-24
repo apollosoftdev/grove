@@ -35,9 +35,12 @@ export const productSchema = z.object({
     .min(2, "Utility must be at least 2 characters")
     .max(80, "Utility is too long"),
   price: z
-    .number()
+    .coerce.number()
     .min(0, "Price must be a positive number"),
   image: z.string().url("Enter a valid image URL"),
+  createdAt: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Enter a valid date",
+  }),
 });
 
 export type LoginInput = z.infer<typeof loginSchema>;
