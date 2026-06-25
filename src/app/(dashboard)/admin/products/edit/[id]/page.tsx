@@ -3,6 +3,7 @@
 import { deleteProduct, editProduct, type ProductFormState } from "@/actions/products";
 import { useActionState } from "react";
 import { use } from 'react';
+import ImageUpload from "@/components/uploadfile";
 
 function SubmitButton({ pending, label }: { pending: boolean; label: string }) {
   return (
@@ -69,6 +70,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                 className="object-cover bg-green-100"
                 sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
               />
+              <ImageUpload />
             </div>
             <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
               <div>

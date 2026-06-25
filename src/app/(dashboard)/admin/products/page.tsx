@@ -10,6 +10,7 @@ export default async function ProductsListPage() {
   const products = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });
+  
 
   return (
     <div className="space-y-6">
