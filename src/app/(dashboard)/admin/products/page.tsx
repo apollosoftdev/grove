@@ -2,7 +2,7 @@
 
 import { requireAdmin } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
-// import { useActionState } from "react";
+import Link from "next/link";
 
 export default async function ProductsListPage() {
   await requireAdmin();
@@ -10,8 +10,6 @@ export default async function ProductsListPage() {
   const products = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });
-
-  // const [isDelete, setIsDelete, pending] = useActionState(deleteProducts, deleteState);
 
   return (
     <div className="space-y-6">
@@ -74,8 +72,12 @@ export default async function ProductsListPage() {
                     {product.createdAt.toLocaleDateString()}
                   </td>
                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
-                    <button >edit</button>
-                    <button >delete</button>
+                    <Link
+                      href={`/admin/products/edit/${product.id}`}
+                      className="font-medium text-gray-700 transition hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                    >
+                      Edit
+                    </Link>
                   </td>
                 </tr>
               ))}

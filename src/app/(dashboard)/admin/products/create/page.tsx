@@ -5,7 +5,6 @@ import { createProduct, type ProductFormState } from "@/actions/products";
 import { useActionState } from "react";
 
 function SubmitButton({ pending, label }: { pending: boolean; label: string }) {
-  console.log("qqqqqq");
   return (
     <button
       type="submit"
@@ -108,20 +107,6 @@ export default function createProductPage() {
           className={fieldClass}
         />
         <FieldError messages={state.fieldErrors?.price} />
-      </div>
-      <div>
-        <label htmlFor="product_createdAt" className={labelClass}>
-          Date
-        </label>
-        <input
-          id="product_createdAt"
-          name="createdAt"
-          type="date"
-          autoComplete="createdAt"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.createdAt} />
       </div>
       <SubmitButton pending={pending} label="Create Products" />
     </form>

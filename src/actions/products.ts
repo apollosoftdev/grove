@@ -4,9 +4,8 @@ import { z } from "zod";
 
 
 import { prisma } from "@/lib/prisma";
-import { productSchema } from "@/lib/validation";
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { id } from "zod/locales";
 
 export type ProductFormState = {
   error?: string;
@@ -24,32 +23,27 @@ export async function createProduct(
     utility: formData.get("utility"),
     price: Number(formData.get("price")),
     image: formData.get("image"),
-    createdAt: new Date(formData.get("createdAt") as string),
   };
   if (!newProducts) {
     return { fieldErrors: z.flattenError(newProducts).fieldErrors };
   }
-
-  // const existing = await prisma.product.findFirst({ where: { name } });
-
-  // if (existing) {
-  //   return { error: "A product with this name already exists." };
-  // }
   
   try {
-      console.log('333');
-      console.log(newProducts);
+
       await prisma.product.create({
         data: {
-          name: String(newProducts.name || ''),
-          property: String(newProducts.property || ''),
+          name: String(newProducts.name),
+          property: String(newProducts.property),
           utility: String(newProducts.utility || ''),
-          price: Number(newProducts.price || 0),
-          image: String(newProducts.image || ''),
-          createdAt: newProducts.createdAt || new Date(),
+          price: Number(newProducts.price),
+           images: {
+              create: [
+                { url: String(newProducts.image || "") }
+              ]
+            },
         },
       });
-    console.log('444');
+
     revalidatePath("/"); 
     return { success: true };
 
@@ -61,6 +55,66 @@ export async function createProduct(
       }
       throw error;
     }
-    // Unreachable: signIn redirects on success.
-    return {}
+}
+
+
+export async function editProduct(
+  _prevState: ProductFormState,
+  formData: FormData
+):Promise<ProductFormState> {
+  
+  const updateProducts = {
+    name: formData.get("name"),
+    property: formData.get("property"),
+    utility: formData.get("utility"),
+    price: Number(formData.get("price")),
+    image: formData.get("image"),
+  };
+  const id = formData.get("id") as string;
+  try {
+      await prisma.product.update({
+        where: { id },
+        data: {
+          name: String(updateProducts.name),
+          property: String(updateProducts.property),
+          utility: String(updateProducts.utility || ''),
+          price: Number(updateProducts.price),
+        },
+      });
+
+    revalidatePath("/"); 
+    revalidatePath("/admin/products"); 
+    return { success: true };
+
+    } catch (error) {
+      // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
+      console.log(error);
+      if (error) {
+        return { error: "Invalid email or password." };
+      }
+      throw error;
+    }
+}
+
+
+export async function deleteProduct(
+  _prevState: ProductFormState,
+  formData: FormData
+):Promise<ProductFormState> {
+  const id = formData.get("id") as string;
+  try {
+    await prisma.product.delete({where: { id }});
+
+    revalidatePath("/"); 
+    revalidatePath("/admin/products"); 
+    return { success: true };
+
+    } catch (error) {
+      // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
+      console.log(error);
+      if (error) {
+        return { error: "Invalid email or password." };
+      }
+      throw error;
+    }
 }
