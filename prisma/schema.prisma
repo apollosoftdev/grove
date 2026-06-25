@@ -76,11 +76,20 @@ model Product {
   id            String    @id @default(cuid())
   name          String
   property      String
-  image         String?
   utility       String?
   price         Int
   rating        Int?
   comment       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  image         ImageUpload[]
+}
+
+model ImageUpload {
+  id            String    @id @default(cuid())
+  url           String
+  productId     String
+  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
