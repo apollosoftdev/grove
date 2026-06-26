@@ -27,6 +27,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  favoriteProducts  FavouriteProducts[] 
   accounts Account[]
   sessions Session[]
 }
@@ -92,4 +93,22 @@ model ImageUpload {
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  favoriteProducts  FavouriteProducts[]
+
+}
+
+model FavouriteProducts {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name          String
+  property      String
+  utility       String?
+  price         Int
+  rating        Int?
+  comment       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  imageId       String
+  image         ImageUpload @relation(fields: [imageId], references: [id], onDelete: Cascade)
 }
