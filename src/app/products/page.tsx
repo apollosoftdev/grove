@@ -9,15 +9,12 @@ import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
 export default async function user_products(){
 
   const products_list = await prisma.product.findMany({select: {
-
     id: true, 
     name: true,
     property: true,
-    image: true,
     utility: true,
     price: true,
   }});
-
   const session = await requireUser();
   const isAdmin = session.user.role === "ADMIN";
 

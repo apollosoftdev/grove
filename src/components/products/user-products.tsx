@@ -1,11 +1,9 @@
 'use client';
-
 // 1. Define the shape of a single product
 type Product = {
   id: string;
   name: string;
   property: string;
-  image: string | null;
   utility: string | null;
   price: number;
 };
@@ -38,7 +36,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
               >
                 <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
                   <img
-                    src={product.image?? ""}
+                    src=""
                     alt=""
                     className="object-cover bg-green-100"
                     sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"

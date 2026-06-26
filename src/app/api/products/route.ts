@@ -15,6 +15,7 @@ export async function GET(){
                 comment: true,
             }
         });
+        
         return NextResponse.json({ products });
     } catch(error) {
         return NextResponse.json({ error }, {status: 500});
@@ -35,7 +36,6 @@ export async function POST(request: Request){
             property: String(products.property),
             utility: String(products.utility),
             price: products.price,
-            image: String(products.image),
             createdAt: String(products.createdAt),
             },
         });

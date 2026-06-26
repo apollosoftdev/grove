@@ -39,10 +39,10 @@ export default function ImageUpload(){
         }
     }
     return (
-        <div>
+        <div className="border border-ink rounded-lg my-2 mx-2">
             <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)}/>
             <button onClick={handleUpload} disabled={!file ||uploading}>
-                {uploading ? "Uplaoding..." : "UploadImage" }
+                {uploading ? "Uplaoding..." : "" }
             </button>
             { imageUrl && <img src={imageUrl} alt="Uploaded" width={300} />}
         </div>
