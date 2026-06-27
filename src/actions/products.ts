@@ -130,9 +130,8 @@ export async function getFavouriteProduct(
       where: { id : favouriteProductId 
       }});
     revalidatePath("/"); 
-    revalidatePath("/admin/products"); 
+    revalidatePath("/dashboard"); 
     return { success: true };
-
     }
     catch (error) {
       // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
