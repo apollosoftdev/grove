@@ -119,26 +119,3 @@ export async function deleteProduct(
     }
 }
 
-export async function getFavouriteProduct(
-  _prevState: ProductFormState,
-  formData: FormData
-):Promise<ProductFormState> {
-
-  const favouriteProductId = formData.get("id") as string;
-  try{
-    await prisma.favouriteProducts.findUnique({
-      where: { id : favouriteProductId 
-      }});
-    revalidatePath("/"); 
-    revalidatePath("/dashboard"); 
-    return { success: true };
-    }
-    catch (error) {
-      // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
-      console.log(error);
-      if (error) {
-        return { error: "Invalid email or password." };
-      }
-      throw error;
-    }
-}
