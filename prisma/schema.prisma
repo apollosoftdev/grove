@@ -16,7 +16,7 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @default(uuid())
   name          String?
   email         String    @unique
   emailVerified DateTime?
@@ -27,7 +27,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  favoriteProducts  FavouriteProducts[] 
+  carts         Carts[]
   accounts Account[]
   sessions Session[]
 }
@@ -74,7 +74,7 @@ model VerificationToken {
 }
 
 model Product {
-  id            String    @id @default(cuid())
+  id            String    @id @default(uuid())
   name          String
   property      String
   utility       String?
@@ -84,6 +84,7 @@ model Product {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   image         ImageUpload[]
+  items         CartItem[]
 }
 
 model ImageUpload {
@@ -93,22 +94,24 @@ model ImageUpload {
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  favoriteProducts  FavouriteProducts[]
 
 }
 
-model FavouriteProducts {
+model Carts {
   id            String    @id @default(cuid())
-  userId        String
-  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  name          String
-  property      String
-  utility       String?
-  price         Int
-  rating        Int?
-  comment       String?
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  items         CartItem[]
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  imageId       String
-  image         ImageUpload @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  updatedAt     DateTime  @updatedAt 
+}
+
+model CartItem{
+  id            String    @id @default(cuid())
+  cartId        String
+  cart          Carts     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id]) 
+
+  @@unique([cartId, productId]) // duplicate items in the same cart
 }
