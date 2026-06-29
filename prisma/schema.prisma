@@ -16,7 +16,7 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String    @id @default(cuid())
   name          String?
   email         String    @unique
   emailVerified DateTime?
@@ -74,7 +74,7 @@ model VerificationToken {
 }
 
 model Product {
-  id            String    @id @default(uuid())
+  id            String    @id @default(cuid())
   name          String
   property      String
   utility       String?
@@ -100,7 +100,7 @@ model ImageUpload {
 model Carts {
   id            String    @id @default(cuid())
   userId        String    @unique
-  user          User      @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   items         CartItem[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt 
@@ -111,7 +111,7 @@ model CartItem{
   cartId        String
   cart          Carts     @relation(fields: [cartId], references: [id], onDelete: Cascade)
   productId     String
-  product       Product   @relation(fields: [productId], references: [id]) 
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade) 
   quantity      Int       @default(1)
 
   @@unique([cartId, productId]) // duplicate items in the same cart
