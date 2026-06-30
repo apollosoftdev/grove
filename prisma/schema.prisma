@@ -27,6 +27,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  carts         Cart[]
   accounts Account[]
   sessions Session[]
 }
@@ -83,6 +84,7 @@ model Product {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   image         ImageUpload[]
+  items         CartItem[]
 }
 
 model ImageUpload {
@@ -95,4 +97,25 @@ model ImageUpload {
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+}
+
+model Cart {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items         CartItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt 
+}
+
+model CartItem{
+  id            String    @id @default(cuid())
+  cartId        String
+  cart          Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade) 
+  quantity      Int       @default(1)
+
+  @@unique([cartId, productId]) // duplicate items in the same cart
 }
