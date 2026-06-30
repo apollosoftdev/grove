@@ -27,6 +27,15 @@ async function admin() {
       name: "Administrator",
       passwordHash,
       role: "ADMIN",
+      file: 
+      {
+        create:{
+            fileName:"flex",
+            originalName:"davin",
+            bucket:"default",
+            mimeType:"default1"
+        }
+      }
     },
   });
 
@@ -52,11 +61,10 @@ async function products() {
     return {
       name: faker.commerce.productName(),
       property: faker.commerce.productAdjective(), // e.g., "Durable", "Ergonomic", "Sleek"
-      image: faker.image.url({ width: 640, height: 480 }),
+      // image: faker.image.url({ width: 640, height: 480 }),
       utility: faker.commerce.productDescription(), // Gives a practical description of the item
       price: randomPrice,
-      rating: randomRating,
-      comment: faker.helpers.maybe(() => faker.lorem.sentence(), { probability: 0.7 }) ?? null, // Simulates a user comment
+      // comment: faker.helpers.maybe(() => faker.lorem.sentence(), { probability: 0.7 }) ?? null, // Simulates a user comment
     };
   });
 

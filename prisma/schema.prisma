@@ -28,6 +28,9 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  fileId        String
+  file          File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  carts         Cart[]
   accounts Account[]
   sessions Session[]
 }
@@ -82,19 +85,28 @@ model Product {
   comment       Comment[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  image         ImageUpload[]
+  image         FileToProduct[]
+  items         CartItem[]
 }
 
-model ImageUpload {
-  id            String    @id @default(cuid())
+model FileToProduct{
+  id            Int     @id @default(autoincrement())
+  productId     String
+  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  fileId        String
+  file          File  @relation(fields: [fileId], references: [id], onDelete: Cascade)
+}
+
+model File {
+  id            String    @id @default(cuid()) 
   fileName      String
   originalName  String
   bucket        String
   mimeType      String   
-  productId     String
-  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  user          User[]
+  filetoproduct FileToProduct[]
 }
 
 model Comment {
@@ -108,4 +120,22 @@ model Comment {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   commentId     Int   @default(0)
+model Cart {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items         CartItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt 
+}
+
+model CartItem{
+  id            String    @id @default(cuid())
+  cartId        String
+  cart          Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade) 
+  quantity      Int       @default(1)
+
+  @@unique([cartId, productId]) // duplicate items in the same cart
 }
