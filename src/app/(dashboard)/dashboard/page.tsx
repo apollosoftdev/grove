@@ -2,6 +2,16 @@ import Link from "next/link";
 import { requireUser } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 
+type CartItem = {
+  id: string
+  product: {
+    name?: string
+    property?: string
+    utility?: string |null
+    price?: number
+  }
+}
+
 export default async function productlist({
   searchParams,
 }: {
@@ -12,7 +22,7 @@ export default async function productlist({
   const { error } = await searchParams;
   const isAdmin = session.user.role === "ADMIN";
 
-  const carts = await prisma.cartItem.findMany({
+  const carts: CartItem[]  = await prisma.cartItem.findMany({
     include: { product: true}
   })
 
@@ -77,12 +87,15 @@ export default async function productlist({
                 <th className="px-4 py-3 font-medium">Property</th>
                 <th className="px-4 py-3 font-medium">Utility</th>
                 <th className="px-4 py-3 font-medium">Price</th>
-                <th className="px-4 py-3 font-medium">Created At</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5 dark:divide-white/5">
               {carts.length === 0
-              ? "No products"
+              ? (<tr>
+                    <td colSpan={4} className="text-center py-4 text-gray-500">
+                      No products
+                    </td>
+                  </tr>)
               : carts.map((item,index) => (
                 <tr key={item.id}>
                   <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
@@ -113,9 +126,6 @@ export default async function productlist({
                     <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                       {item.product.price ?? 0}
                     </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
-                    {item.product.createdAt.toLocaleDateString()}
                   </td>
                 </tr>
               ))}

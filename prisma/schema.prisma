@@ -27,6 +27,8 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  fileId        String
+  file          File @relation(fields: [fileId], references: [id], onDelete: Cascade)
   carts         Cart[]
   accounts Account[]
   sessions Session[]
@@ -83,18 +85,28 @@ model Product {
   comment       String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  image         ImageUpload[]
+  image         FileToProduct[]
   items         CartItem[]
 }
 
-model ImageUpload {
-  id            String    @id @default(cuid())
-  url           String
+model FileToProduct{
+  id            Int     @id @default(autoincrement())
   productId     String
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  fileId        String
+  file          File  @relation(fields: [fileId], references: [id], onDelete: Cascade)
+}
+
+model File {
+  id            String    @id @default(cuid()) 
+  fileName      String
+  originalName  String
+  bucket        String
+  mimeType      String   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
+  user          User[]
+  filetoproduct FileToProduct[]
 }
 
 model Cart {

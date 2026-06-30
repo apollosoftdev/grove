@@ -14,6 +14,7 @@ export async function addToCart(
     _prevState: ActionState,
     formData: FormData
 ): Promise<{ success: boolean, message: string; } | undefined> {
+    console.log(formData);
     try {
         const session = await requireUser();
         const userId = session.user.id;
@@ -24,15 +25,16 @@ export async function addToCart(
 
         const productId = formData.get('productId') as string;
 
-        let carts = await prisma.carts.findFirst({
+
+        let carts = await prisma.cart.findFirst({
             where: {
                 userId: userId
             }
         })
 
         if (!carts) {
-            carts = await prisma.carts.create({
-                data: { userId, productId }
+            carts = await prisma.cart.create({
+                data: { userId }
             })
         }
 

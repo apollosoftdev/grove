@@ -83,7 +83,7 @@ export async function editProduct(
       });
 
     revalidatePath("/"); 
-    revalidatePath("/admin/products"); 
+    revalidatePath("/admin/products");  
     return { success: true };
 
     } catch (error) {
