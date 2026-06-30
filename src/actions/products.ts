@@ -83,7 +83,7 @@ export async function editProduct(
       });
 
     revalidatePath("/"); 
-    revalidatePath("/admin/products"); 
+    revalidatePath("/admin/products");  
     return { success: true };
 
     } catch (error) {
@@ -119,6 +119,7 @@ export async function deleteProduct(
     }
 }
 
+<<<<<<< HEAD
 
 export async function createCommets(
   _prevState: ProductFormState,
@@ -161,3 +162,5 @@ export async function createCommets(
     }
 }
 ]
+=======
+>>>>>>> main

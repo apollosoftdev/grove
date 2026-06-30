@@ -23,13 +23,15 @@ export async function POST(request: Request){
 
         const iamgeUrl = `http://${process.env.MINIO_ENDPOINT}:${process.env.MINIO_PORT}/${bucketName}/${fileName}`;
         
-        await prisma.imageUpload.create({
+        await prisma.file.create({
             data: {
-                url: iamgeUrl,
-                productId: "some-product-id" 
+                bucket: iamgeUrl,
+                fileName: "some-product-id", 
+                mimeType: "MimeType",
+                originalName: "product-id" 
             }});
         
-        return NextResponse.json({ uploadUrl: url }, { status: 201});
+        return NextResponse.json({  }, { status: 201});
     } catch (error) {
         console.error("Error uploading file:", error);
         return NextResponse.json({ error: "Failed to upload file" }, { status: 500 });
