@@ -74,7 +74,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                     Review of product.
                   </h1>
                 </div>
-                <div className="border border-ink rounded-lg w-[600px] h-[500px] text-wrap">
+                <div className="border overflow-x-auto border-ink rounded-lg w-[600px] h-[500px] text-wrap">
                   {products.map((product, index)=>(
                     <div key={product.id || index} className="border border-ink rounded-lg w-[200px] h-[50px] break-words">
                       {product.content}
