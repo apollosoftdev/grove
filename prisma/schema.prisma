@@ -27,7 +27,8 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  fileproxy     FileProxy[]
+  fileId        String
+  file          File @relation(fields: [fileId], references: [id], onDelete: Cascade)
   carts         Cart[]
   accounts Account[]
   sessions Session[]
@@ -84,30 +85,28 @@ model Product {
   comment       String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  image         FileProxy[]
+  image         FileToProduct[]
   items         CartItem[]
 }
 
-model FileProxy{
+model FileToProduct{
   id            Int     @id @default(autoincrement())
   productId     String
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  fileupload    FileUpload[]
-  userId        String
-  user          User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  file          File[]
 }
 
-model FileUpload {
-  id            String    @id @default(cuid())
+model File {
+  id            String    @id @default(cuid()) 
   fileName      String
   originalName  String
   bucket        String
   mimeType      String   
-  fileproxyId   Int
-  fileproxy  FileProxy @relation(fields: [fileproxyId], references: [id], onDelete: Cascade)
+  filetoproductId   Int
+  fileproxy     FileToProduct @relation(fields: [filetoproductId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
+  user          User[]
 }
 
 model Cart {
