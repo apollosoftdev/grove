@@ -119,3 +119,44 @@ export async function deleteProduct(
     }
 }
 
+
+export async function createCommets(
+  _prevState: ProductFormState,
+  formData: FormData,
+): Promise<ProductFormState> {
+  const newProducts = {
+    comment: formData.get("comment"),
+    rating: formData.get("rating"),
+    userId: formData.get("userId"),
+    productId: formData.get("productId"),
+    commentId: formData.get("commentId"),
+  };
+  if (!newProducts) {
+    return { fieldErrors: z.flattenError(newProducts).fieldErrors };
+  }
+  
+  const commentId = newProducts.commentId === null ? 0 : Number(newProducts.commentId);
+  try {
+
+      await prisma.comment.create({
+        data: {
+          comment: String(newProducts.comment || []),
+          rating: Number(newProducts.rating || []),
+          userId: String(newProducts.userId || []),
+          productId: String(newProducts.productId || []),
+          commentId: commentId + 1,
+        },
+      });
+
+    revalidatePath("/"); 
+    return { success: true };
+
+    } catch (error) {
+      // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
+      console.log(error);
+      if (error) {
+        return { error: "Invalid email or password." };
+      }
+      throw error;
+    }
+}

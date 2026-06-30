@@ -46,14 +46,14 @@ export default async function ProductsListPage() {
                       {index + 1}
                     </span>
                   </td>
-                  <td className="px-4 py-3">
-                    {/* {product.image ?
+                  {/* <td className="px-4 py-3">
+                    {product.image ?
                       <img className="size-6" src={product.image} /> :
                       <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200 text-lg">
                         {product.name[0]}
                       </span>
-                    } */}
-                  </td>
+                    }
+                  </td> */}
                   <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
                     {product.name ?? "-"}
                   </td>
