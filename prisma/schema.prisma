@@ -27,7 +27,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  carts         Carts[]
+  carts         Cart[]
   accounts Account[]
   sessions Session[]
 }
@@ -97,7 +97,7 @@ model ImageUpload {
 
 }
 
-model Carts {
+model Cart {
   id            String    @id @default(cuid())
   userId        String    @unique
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -109,7 +109,7 @@ model Carts {
 model CartItem{
   id            String    @id @default(cuid())
   cartId        String
-  cart          Carts     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cart          Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
   productId     String
   product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade) 
   quantity      Int       @default(1)
