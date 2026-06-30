@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 // 1. Define the shape of a single product
 type Product = {
   id: string;
@@ -60,6 +61,13 @@ export default function UserProductsPage({ products }: ProductListProps) {
                     </span>
                   </div>
                   <div className="flex justify-end items-center gap-3">
+                    <Link
+                      href={`products/comment/${product.id}`}
+                      className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600"
+                      aria-label="Save to favorites"
+                    >
+                      comment
+                    </Link>
                     <button
                       type="button"
                       className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600"

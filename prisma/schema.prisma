@@ -21,6 +21,7 @@ model User {
   email         String    @unique
   emailVerified DateTime?
   image         String?
+  comment           Comment[]
   // Hashed password for the Credentials provider. Null for OAuth-only users.
   passwordHash  String?
   role          Role      @default(USER)
@@ -78,8 +79,7 @@ model Product {
   property      String
   utility       String?
   price         Int
-  rating        Int?
-  comment       String?
+  comment       Comment[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   image         ImageUpload[]
@@ -95,4 +95,17 @@ model ImageUpload {
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+}
+
+model Comment {
+  id            Int    @id @default(autoincrement())
+  comment       String?
+  rating        Int?
+  productId     String
+  product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  commentId     Int   @default(0)
 }

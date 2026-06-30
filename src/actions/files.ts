@@ -15,8 +15,8 @@ export async function getFileWithUrl(fileId:string){
     const expirySeconds = 3600;
 
     const url = await minioClient.presignedGetObject(
-        ImageUpload.bucket,
-        ImageUpload.fileName,
+        fileRecord.bucket,
+        fileRecord.fileName,
         expirySeconds
     )
 
