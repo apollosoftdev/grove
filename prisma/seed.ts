@@ -52,7 +52,7 @@ async function products() {
     return {
       name: faker.commerce.productName(),
       property: faker.commerce.productAdjective(), // e.g., "Durable", "Ergonomic", "Sleek"
-      image: faker.image.url({ width: 640, height: 480 }),
+      // image: faker.image.url({ width: 640, height: 480 }),
       utility: faker.commerce.productDescription(), // Gives a practical description of the item
       price: randomPrice,
       rating: randomRating,
