@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-
+import { auth } from "@/auth";
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -128,24 +128,35 @@ export async function createCommets(
   const newProducts = {
     comment: formData.get("comment"),
     rating: formData.get("rating"),
-    userId: formData.get("userId"),
     productId: formData.get("productId"),
     commentId: formData.get("commentId"),
   };
   if (!newProducts) {
     return { fieldErrors: z.flattenError(newProducts).fieldErrors };
   }
-  
+
   const commentId = newProducts.commentId === null ? 0 : Number(newProducts.commentId);
+  const ratingNumber = newProducts.rating === null ? 0 : Number(newProducts.rating);
+  const commentText = typeof newProducts.comment === 'string' ? newProducts.comment : '';
+  const productId = typeof newProducts.productId === 'string' ? newProducts.productId : '';
+  const session = await auth();
+  const userId = session?.user.id;
+
+  console.log('qqqqqaaaaa');
+
   try {
 
       await prisma.comment.create({
         data: {
-          comment: String(newProducts.comment || []),
-          rating: Number(newProducts.rating || []),
-          userId: String(newProducts.userId || []),
-          productId: String(newProducts.productId || []),
-          commentId: commentId + 1,
+          content: commentText,
+          rating: ratingNumber,
+          product: {
+          connect: { id: productId }
+          },
+          user: {
+            connect: { id: userId }
+          },
+          commentId: Number(commentId) + 1,
         },
       });
 
@@ -156,7 +167,7 @@ export async function createCommets(
       // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
       console.log(error);
       if (error) {
-        return { error: "Invalid email or password." };
+        return { error: "Failed" };
       }
       throw error;
     }

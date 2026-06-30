@@ -21,15 +21,14 @@ model User {
   email         String    @unique
   emailVerified DateTime?
   image         String?
-  comment           Comment[]
-  // Hashed password for the Credentials provider. Null for OAuth-only users.
+  comment       Comment[]
   passwordHash  String?
   role          Role      @default(USER)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  fileId        String
-  file          File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  fileId        String?
+  file          File?  @relation(fields: [fileId], references: [id], onDelete: Cascade)
   carts         Cart[]
   accounts Account[]
   sessions Session[]
@@ -110,8 +109,8 @@ model File {
 }
 
 model Comment {
-  id            Int    @id @default(autoincrement())
-  comment       String?
+  id            String    @id @default(cuid())
+  content       String?
   rating        Int?
   productId     String
   product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)

@@ -12,6 +12,7 @@ const initialState : ProductFormState= {
 export default function editProductPage({ params }: { params: Promise<{ id: string }> }) {
 
     const { id } =use(params);
+    const rating = 4.5;
     const [state, formAction, pending] = useActionState(createCommets, initialState);
     return (
     <>
@@ -29,14 +30,15 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                 </div>
                 <form action={formAction} className="flex flex-col justify-center gap-4">
                     <input type="hidden" name="productId" value={id} />
-                    <textarea name="comment" className="border border-ink rounded-lg my-5 w-[600px] h-[100px]" />
-                    <button type="submit" className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600" aria-label="Save to favorites">
+                    {/* <input type="hidden" name="userId" value={id} /> */}
+                    <input type="hidden" name="rating" value={rating} />
+                    <textarea name="comment" className="border border-ink rounded-lg my-5 w-[600px] h-[100px]" required/>
+                    <button disabled={pending} type="submit" className="flex ml-[400px] h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600" aria-label="Save to favorites">
                         {pending ? "please wait ... " : "" }
                         send
                     </button>
-
-                </form>
-            </div>
+                </form> 
+              </div>
             </div>
           </main>
         </div>
