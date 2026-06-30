@@ -12,14 +12,13 @@ export default async function user_products(){
     id: true, 
     name: true,
     property: true,
-    image: true,
+    // image: true,
     utility: true,
     price: true,
   }});
 
   const session = await requireUser();
   const isAdmin = session.user.role === "ADMIN";
-
   
   return (
     <div className="flex min-h-screen flex-col">

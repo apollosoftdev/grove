@@ -3,13 +3,11 @@
 import { useActionState } from "react";
 import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
-
 // 1. Define the shape of a single product
 type Product = {
   id: string;
   name: string;
   property: string;
-  // image: string | null;
   utility: string | null;
   price: number;
 };
@@ -35,7 +33,6 @@ const addToCartAction = async (
 
 export default function UserProductsPage({ products }: ProductListProps) {
 
-  console.log("111");
   const [state, formAction, ispending] = useActionState(addToCartAction, initialstate);
 
   return (

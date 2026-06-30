@@ -2,8 +2,6 @@ import { requireAdmin } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminPage() {
-  // Authoritative server-side authorization — admins only.
-  await requireAdmin();
 
   const users = await prisma.user.findMany({
     orderBy: { createdAt: "desc" },
@@ -11,6 +9,7 @@ export default async function AdminPage() {
       id: true,
       name: true,
       email: true,
+      image: true,
       role: true,
       createdAt: true,
     },

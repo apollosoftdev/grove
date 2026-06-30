@@ -28,13 +28,14 @@ export default async function ProductsListPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-black/10 bg-black/[0.02] text-xs uppercase tracking-wide text-gray-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
               <tr>
-                <th className="px-4 py-3 font-medium">#</th>
-                <th className="px-4 py-3 font-medium">Image</th>
-                <th className="px-4 py-3 font-medium">Name</th>
-                <th className="px-4 py-3 font-medium">Property</th>
-                <th className="px-4 py-3 font-medium">Utility</th>
-                <th className="px-4 py-3 font-medium">Price</th>
-                <th className="px-4 py-3 font-medium">Created At</th>
+                <th className="px-4 py-3 font-medium text-center">No</th>
+                <th className="px-4 py-3 font-medium text-center">Image</th>
+                <th className="px-4 py-3 font-medium text-center">Name</th>
+                <th className="px-4 py-3 font-medium text-center">Property</th>
+                <th className="px-4 py-3 font-medium text-center">Utility</th>
+                <th className="px-4 py-3 font-medium text-center">Price</th>
+                <th className="px-4 py-3 font-medium text-center">Created At</th>
+                <th className="px-4 py-3 font-medium text-center">Edit</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5 dark:divide-white/5">
