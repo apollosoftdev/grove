@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function getFileWithUrl(fileId:string){
 
-    const fileRecord = await prisma.imageUpload.findUnique({
+    const fileRecord = await prisma.fileUpload.findUnique({
         where: {
             id:fileId
         }
