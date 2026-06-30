@@ -63,12 +63,21 @@ export async function registerAction(
   const { name, email, password } = parsed.data;
 
   const existing = await prisma.user.findUnique({ where: { email } });
+
+  const file = {
+    data:{
+                bucket: "iamgeUrl",
+                fileName: "some-product-id", 
+                mimeType: "iamgeUrl",
+                originalName: "product-id" 
+            }}
+
   if (existing) {
     return { error: "An account with this email already exists." };
   }
 
   const passwordHash = await hashPassword(password);
-  await prisma.user.create({ data: { name, email, passwordHash } });
+  await prisma.user.create({ data: { name, email, passwordHash,file } });
 
   try {
     await signIn("credentials", {

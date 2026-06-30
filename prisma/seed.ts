@@ -27,6 +27,15 @@ async function admin() {
       name: "Administrator",
       passwordHash,
       role: "ADMIN",
+      file: 
+      {
+        create:{
+            fileName:"flex",
+            originalName:"davin",
+            bucket:"default",
+            mimeType:"default1"
+        }
+      }
     },
   });
 

@@ -12,7 +12,7 @@ export default async function user_products(){
     id: true, 
     name: true,
     property: true,
-    image: true,
+    // image: true,
     utility: true,
     price: true,
   }});
