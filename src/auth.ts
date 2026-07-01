@@ -11,7 +11,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
-    Credentials({
+    Credentials({ 
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
