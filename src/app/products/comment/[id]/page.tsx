@@ -12,8 +12,8 @@ const initialState : ProductFormState= {
 type Product = {
   id:string;
   content:string;
-  rating: number;
-}
+    rating: number;
+  }
 
 const ratingChoice = {
   id: "1",
@@ -39,7 +39,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
     useEffect(()=>{
       async function fetchProducts() {
         try {
-          const res = await fetch("/api/getcomments");
+          const res = await fetch(`/api/getcomments/${id}`);
           const data = await res.json();
           setProducts(data);
         }
