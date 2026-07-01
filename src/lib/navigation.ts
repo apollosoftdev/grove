@@ -10,4 +10,5 @@ export const dashboardNav: NavItem[] = [
   { label: "Overview", href: "/dashboard" },
   { label: "Admin", href: "/admin", adminOnly: true },
   { label: "Products", href: "/products"},
+  { label: "Purchase", href: "/purchase"},
 ];
