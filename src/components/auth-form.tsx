@@ -105,52 +105,50 @@ export function RegisterForm() {
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <FormError message={state.error} />
+        <div>
+          <label htmlFor="name" className={labelClass}>
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            className={fieldClass}
+          />
+          <FieldError messages={state.fieldErrors?.name} />
+        </div>
 
-      <div>
-        <label htmlFor="name" className={labelClass}>
-          Name
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.name} />
-      </div>
+        <div>
+          <label htmlFor="email" className={labelClass}>
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className={fieldClass}
+          />
+          <FieldError messages={state.fieldErrors?.email} />
+        </div>
 
-      <div>
-        <label htmlFor="email" className={labelClass}>
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.email} />
-      </div>
-
-      <div>
-        <label htmlFor="password" className={labelClass}>
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.password} />
-      </div>
-
+        <div>
+          <label htmlFor="password" className={labelClass}>
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            required
+            className={fieldClass}
+          />
+          <FieldError messages={state.fieldErrors?.password} />
+        </div>
       <SubmitButton pending={pending} label="Create account" />
 
       <p className="text-center text-sm text-gray-600 dark:text-gray-400">

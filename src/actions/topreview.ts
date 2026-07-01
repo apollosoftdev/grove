@@ -38,7 +38,7 @@ export async function getTopProducts(){
             };                                                            
         })
         
-        const sortedProducts = result.sort((a,b) => b.averageRating - a.averageRating ).slice(0,5);
+        const sortedProducts = result.sort((a,b) => b.averageRating - a.averageRating ).slice(0,6);
         const topProductIds = sortedProducts.map((p) => p.productId);
         const topProducts = await prisma.product.findMany({
             where: {

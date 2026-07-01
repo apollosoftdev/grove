@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { auth } from "@/auth";
 import { LogoutButton } from "@/components/logout-button";
-import { UserRoundCog, UserKey } from "lucide-react";
+import { UserRoundCog, UserKey, Broccoli, ScrollText } from "lucide-react";
 
 import { Logo } from "./logo";
 
@@ -22,7 +22,10 @@ export async function SiteHeader() {
                 href="/dashboard"
                 className="font-medium text-gray-700 transition hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
               >
+                <div className="flex items-center gap-2">
+                <ScrollText className="mr-2 inline-block h-4 w-4" />
                 Dashboard
+                </div>
               </Link>
               <LogoutButton />
             </>
@@ -32,6 +35,7 @@ export async function SiteHeader() {
                 href="/products"
                 className="flex items-center gap-2 rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
               >
+                <Broccoli className="mr-2 inline-block h-4 w-4" />
                 Products
               </Link>
               <Link

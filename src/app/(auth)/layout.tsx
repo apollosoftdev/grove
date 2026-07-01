@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Logo } from "@/components/layout/logo";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { Undo2 } from "lucide-react";
 
 export default function AuthLayout({
   children,
@@ -17,7 +18,10 @@ export default function AuthLayout({
             href="/"
             className="text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
           >
-            ← Back home
+            <div className="flex items-center">
+              <Undo2 className="mr-2 inline-block h-4 w-4" />
+              Back home
+            </div>
           </Link>
         </div>
       </header>

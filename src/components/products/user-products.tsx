@@ -50,11 +50,13 @@ export default function UserProductsPage({ products }: ProductListProps) {
         </div>
         <div>
           <Link
-              href="/"
+              href="/dashboard"
               className="text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
-              ← Back home
-          </Link>
+              <div className="flex items-center">
+                Back dashboard
+              </div>
+            </Link>
         </div>
 
       </div>
@@ -91,11 +93,10 @@ export default function UserProductsPage({ products }: ProductListProps) {
                       {product.utility}
                     </span>
                   </div>
-                  <div className="flex justify-end items-center gap-3">
+                  <div className="flex justify-between items-center gap-3">
                     <Link
                       href={`products/comment/${product.id}`}
-                      className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600"
-                      aria-label="Save to favorites"
+                      className="flex items-center rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
                     >
                       comment
                     </Link>
@@ -104,8 +105,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
                       <button
                       type="submit"
                       disabled={ispending}
-                      className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600"
-                      aria-label="Save to favorites"
+                      className="flex items-center rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
                       >
                       +favourite
                       </button>

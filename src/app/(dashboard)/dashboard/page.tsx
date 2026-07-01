@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
+import SalesBarChart from "@/components/admin/barchart";
+import SignalLineChart from "@/components/admin/signalchart";
+import Circlechart from "@/components/admin/circlechart";
+import ConcentricChart from "@/components/admin/concentricchart";
 
 type CartItem = {
   id: string
@@ -71,6 +75,7 @@ export default async function productlist({
         </dl>
       </section>
       {isAdmin && (
+        <>
         <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
             Admin
@@ -93,6 +98,13 @@ export default async function productlist({
           </Link>
           </div>
         </section>
+        <SalesBarChart />
+        <SignalLineChart />
+        <div className="flex">
+        <Circlechart />
+        <ConcentricChart />
+        </div>
+        </>
       )}
     </div>
   );

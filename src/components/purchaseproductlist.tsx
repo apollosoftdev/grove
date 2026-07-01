@@ -113,7 +113,7 @@ export default function PurchaseProductList({
             <form onSubmit={handleSubmit}>
               <button
               type="submit"
-              className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600" aria-label="Save to favorites">
+              className="flex items-center gap-2 rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white">
                 Purchase
               </button>
             </form>
