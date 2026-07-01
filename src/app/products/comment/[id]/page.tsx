@@ -31,7 +31,6 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
 
 
     const { id } =use(params);
-    const rating = 4.5;
     const [state, formAction, pending] = useActionState(createCommets, initialState);
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);

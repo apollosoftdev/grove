@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { getTopProducts } from "@/actions/topreview";
 
 export default async function HomePage() {
-  const session = await auth();
+  // const session = await auth();
   const result = await getTopProducts();
 
   if ("error" in result || !result.topProducts) {
@@ -21,9 +21,49 @@ export default async function HomePage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
-      <main className="flex flex-1 items-center justify-center px-6 py-16">
-        <div className="w-full max-w-xl text-center">
-          <div className="grid grid-cols-3 space-y-5 gap-10">
+      <div className="flex items-center justify-center">
+        <div className="w-full max-w-6xl text-center">
+          <div className="bg-[#163d2a] flex gap-4 rounded-xl">
+            <div className="w-[600px]">
+              <p className="text-xl px-3 mt-10 text-[#c6f24e]">
+                GreenHouse-Grown Shipped in 48H
+              </p>
+              <p className="text-4xl px-3 mt-10 font-bold tracking-tight text-white sm:text-5xl">
+                Products here make your life better
+              </p>
+              <p className="text-lg px-5 mt-10 text-[#4c5a50]">
+                We match every plant to your lifestyle, your home, and your space. Our team of experts will help you find the perfect products for your needs.
+              </p>
+            </div>
+            <div>
+            </div>
+          </div>
+          {/* <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            {session?.user ? (
+              <Link
+                href="/dashboard"
+                className="rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+              >
+                Go to dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-md border border-black/10 px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-black/5 dark:border-white/15 dark:text-white dark:hover:bg-white/5"
+                >
+                  Create account
+                </Link>
+              </>
+            )}
+          </div> */}
+          <div className="grid grid-cols-3 space-y-5 mt-5 gap-10">
           {products.map((product) =>
             <article
                 key={product.id}
@@ -60,41 +100,8 @@ export default async function HomePage() {
               </article>  
           )}
         </div>
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-            grove
-          </h1>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-            A Next.js starter with authentication and role-based authorization,
-            powered by Auth.js, Prisma, and MySQL.
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {session?.user ? (
-              <Link
-                href="/dashboard"
-                className="rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-              >
-                Go to dashboard
-              </Link>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  href="/register"
-                  className="rounded-md border border-black/10 px-5 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-black/5 dark:border-white/15 dark:text-white dark:hover:bg-white/5"
-                >
-                  Create account
-                </Link>
-              </>
-            )}
-          </div>
         </div>
-      </main>
+      </div>
 
       <SiteFooter />
     </div>

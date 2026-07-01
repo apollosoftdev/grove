@@ -7,7 +7,6 @@ export default async function PurchaseProductListPage() {
 
   const session = await requireUser();
   const userId = session.user.id;
-  console.log(userId); 
   
   // Fetch data safely on the server side
   const carts = await prisma.cartItem.findMany({

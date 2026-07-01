@@ -21,7 +21,6 @@ export default function PurchaseProductList({
   carts?: CartItem[];
   userId: string ;
 }) {
-  console.log("111"); 
   const totalPrice = carts.reduce((sum, item) => {
     return sum + (item.product.price ?? 0);
   }, 0);

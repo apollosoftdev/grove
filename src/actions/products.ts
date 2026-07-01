@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { auth } from "@/auth";
+import { requireUser } from "@/lib/guards";
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -125,12 +126,17 @@ export async function createCommets(
   _prevState: ProductFormState,
   formData: FormData,
 ): Promise<ProductFormState> {
+
+  const session = await requireUser();
+  const userId = session.user.id;
+
   const newProducts = {
     comment: formData.get("comment"),
     rating: formData.get("rating"),
     productId: formData.get("productId"),
     commentId: formData.get("commentId"),
   };
+
   if (!newProducts) {
     return { fieldErrors: z.flattenError(newProducts).fieldErrors };
   }
@@ -139,10 +145,6 @@ export async function createCommets(
   const ratingNumber = newProducts.rating === null ? 0 : Number(newProducts.rating);
   const commentText = typeof newProducts.comment === 'string' ? newProducts.comment : '';
   const productId = typeof newProducts.productId === 'string' ? newProducts.productId : '';
-  const session = await auth();
-  const userId = session?.user.id;
-
-  console.log('qqqqqaaaaa');
 
   try {
 

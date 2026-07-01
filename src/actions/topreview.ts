@@ -55,7 +55,6 @@ export async function getTopProducts(){
                 price: true,
             }
         })
-        console.log(topProducts);
         return {
             topProducts
         }

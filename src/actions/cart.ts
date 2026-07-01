@@ -15,9 +15,10 @@ export async function addToCart(
     formData: FormData
 ): Promise<{ success: boolean, message: string; } | undefined> {
     console.log(formData);
+    const session = await requireUser();
+    const userId = session.user.id;
     try {
-        const session = await requireUser();
-        const userId = session.user.id;
+
 
         if (!userId) {
             return { success: false, message: "User not found!" }

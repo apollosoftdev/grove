@@ -27,7 +27,6 @@ const addToCartAction = async (
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> => {
-  console.log("aaa");
   const result = await addToCart(prevState, formData);
   return result ?? prevState;
 };
@@ -38,15 +37,26 @@ export default function UserProductsPage({ products }: ProductListProps) {
 
   return (
     <div className="space-y-3">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className="flex justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
           Products list
-        </h1>
-        {products &&
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {products.length} registered {products.length === 1 ? "product" : "products"}
-          </p>
-        }
+          </h1>
+          {products &&
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {products.length} registered {products.length === 1 ? "product" : "products"}
+            </p>
+          }
+        </div>
+        <div>
+          <Link
+              href="/"
+              className="text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            >
+              ← Back home
+          </Link>
+        </div>
+
       </div>
 
       <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
@@ -97,7 +107,6 @@ export default function UserProductsPage({ products }: ProductListProps) {
                       className="flex h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600"
                       aria-label="Save to favorites"
                       >
-                        {ispending ? "Please wait…" : ""}
                       +favourite
                       </button>
                     </form>

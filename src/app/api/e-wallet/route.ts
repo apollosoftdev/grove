@@ -7,7 +7,6 @@ export async function POST(request: Request){
         const products = await request.json();
         const { name, amount, createdAt,Id }  = products;
         if(!name || !amount || !createdAt || !Id){
-            console.log(Id);
             return NextResponse.json({ error: "Missing required fields" }, {status: 400});
         }
                 
