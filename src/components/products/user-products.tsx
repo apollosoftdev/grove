@@ -59,7 +59,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
   return (
     <div className="space-y-3">
       <div>
-        <h1 className="text-2xl font-bold   text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
         Products list
         </h1>
           {products &&

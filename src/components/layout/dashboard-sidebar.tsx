@@ -4,9 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { dashboardNav } from "@/lib/navigation";
-import { useState } from "react";
-
-export function DashboardSidebar() {
 
 export function DashboardSidebar({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();

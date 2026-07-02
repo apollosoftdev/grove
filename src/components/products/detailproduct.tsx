@@ -11,7 +11,7 @@ type Product = {
 export default function DetailProduct( { detail }: { detail: Product }){
 
     return (
-        <div className="flex gap-5 bg-gray-900 rounded-2xl shadow-md">
+        <div className="flex gap-5 bg-white rounded-2xl shadow-md">
             <div className="relative w-[250px] min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
                 {/* <img
                 src={product.image?? ""}

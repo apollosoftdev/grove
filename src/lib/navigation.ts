@@ -8,7 +8,8 @@ export type NavItem = {
 // Single source of truth for the authenticated dashboard navigation.
 export const dashboardNav: NavItem[] = [
   { label: "Overview", href: "/dashboard" },
-  { label: "Admin", href: "/admin", adminOnly: true },
-  { label: "Products", href: "/products"},
+  { label: "User management", href: "/admin", adminOnly: true },
+  { label: "Product Lists", href: "/adminproducts", adminOnly: true },
+  { label: "Products-Card Shop", href: "/products"},
   { label: "Purchase", href: "/purchase"},
 ];
