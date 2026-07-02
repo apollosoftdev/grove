@@ -11,8 +11,8 @@ export async function SiteHeader() {
   const session = await auth();
 
   return (
-    <header className="border-b border-black/10 dark:border-white/10">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-10 border-b border-black/10 bg-white/80 backdrop-blur dark:border-white/10 dark:bg-black/50">
+      <div className="mx-auto flex w-full max-w-8xl items-center justify-between px-6 py-4">
         <Logo />
         <nav className="flex items-center gap-3 text-sm">
 

@@ -46,7 +46,7 @@ export default async function productlist({
           You don&apos;t have permission to access that page.
         </div>
       )}
-
+{/* 
       <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
           Your account
@@ -73,7 +73,7 @@ export default async function productlist({
             </dd>
           </div>
         </dl>
-      </section>
+      </section> */}
       {isAdmin && (
         <>
         <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">

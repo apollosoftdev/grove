@@ -11,8 +11,8 @@ export default function AuthLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-black/10 dark:border-white/10">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+      <header className="border-b border-black/10 bg-[#f6faf5] dark:border-white/10">
+        <div className="mx-auto flex w-full max-w-8xl items-center justify-between px-6 py-4">
           <Logo />
           <Link
             href="/"
@@ -26,7 +26,7 @@ export default function AuthLayout({
         </div>
       </header>
 
-      <main className="flex flex-1 justify-center px-6 py-12">
+      <main className="flex flex-1 bg-[#f6faf5] justify-center px-6 py-12">
         <div className="w-full max-w-3xl">{children}</div>
       </main>
 
