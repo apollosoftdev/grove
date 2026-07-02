@@ -20,9 +20,10 @@ export default async function LoginPage({
           Sign in to your account
         </p>
       </div>
-
-      <div className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-        <LoginForm callbackUrl={callbackUrl} initialError={initialError} />
+      <div className="flex justify-center">
+        <div className="rounded-xl w-sm border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <LoginForm callbackUrl={callbackUrl} initialError={initialError} />
+        </div>
       </div>
     </>
   );

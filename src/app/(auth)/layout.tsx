@@ -16,7 +16,7 @@ export default function AuthLayout({
           <Logo />
           <Link
             href="/"
-            className="text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            className="text-sm font-medium text-[#22C55E] transition hover:text-green-700 dark:text-gray-400 dark:hover:text-white"
           >
             <div className="flex items-center">
               <Undo2 className="mr-2 inline-block h-4 w-4" />
@@ -27,7 +27,7 @@ export default function AuthLayout({
       </header>
 
       <main className="flex flex-1 justify-center px-6 py-12">
-        <div className="w-full max-w-sm">{children}</div>
+        <div className="w-full max-w-3xl">{children}</div>
       </main>
 
       <SiteFooter />
