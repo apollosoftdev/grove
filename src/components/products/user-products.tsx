@@ -68,6 +68,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
             </p>
           }
       </div>
+      
       <div className="mt-8 z-50"> 
         {detail.utility ? ( 
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={() => setDetail(initialDetailState)}>

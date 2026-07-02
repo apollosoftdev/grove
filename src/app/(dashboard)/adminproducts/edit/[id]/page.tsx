@@ -1,7 +1,7 @@
 "use client"
 
 import { deleteProduct, editProduct, type ProductFormState } from "@/actions/products";
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { use } from 'react';
 import ImageUpload from "@/components/uploadfile";
 
@@ -32,24 +32,40 @@ const initialState : ProductFormState= {
     success: false
 };
 
-type EditProductPageProps = {
-  product: {
-    product: {
-      id: string
-      name: string
-      property: string
-      utility: string
-      price: number
-      image: string
-    }
-  }
+type Product = {
+  name: string,
+  property: string,
+  utility: string,
+  price: number,
 }
-
-export default function editProductPage({ params }: { params: Promise<{ id: string }> }) {
+export default function editProductPage({ params }: { params: Promise<{ id: string }>}) {
 
   const { id } =use(params);
   const [state, formAction, pending] = useActionState(editProduct, initialState);
   const [deleteState, deleteAction, deletePending] = useActionState(deleteProduct, initialState);
+  const [product, setProduct] = useState<Product | null>({
+    name: "",
+    property: "",
+    utility: "",
+    price: 0,
+  });
+
+  useEffect(()=>{
+    async function fetchProducts() {
+      try {
+        const res = await fetch(`/api/editproducts/${id}`);
+        console.log(res);
+        const data = await res.json();
+        setProduct(data);
+      }
+      catch (error) {
+        console.log("Error fetching products:", error);
+      }
+    }
+    if(id){
+      fetchProducts();
+    }
+    },[id])
 
   return (
     <>
@@ -62,12 +78,16 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
         <form action={formAction} className="flex flex-col gap-4" noValidate>
           <input type="hidden" name="id" value={id} />
           <article
-            className="w-[250px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
+            className="w-[1000px] h-[700px] overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
           >
-            <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
-              <ImageUpload />
+            <div className="flex">
+            <div>
+              <div className="w-[600px]">
+                <ImageUpload />
+              </div>
             </div>
-            <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+            <div className="w-[400px]">
+              <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
               <div>
                 <label htmlFor="product_name" className={labelClass}>
                   Name
@@ -76,12 +96,12 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                   id="product_name"
                   name="name"
                   type="text"
+                  placeholder={product?.name ??""}
                   autoComplete="name"
                   className={fieldClass}
                 />
                 <FieldError messages={state.fieldErrors?.name} />
               </div>
-
               <div>
                 <label htmlFor="product_property" className={labelClass}>
                   property
@@ -90,6 +110,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                   id="product_property"
                   name="property"
                   type="text"
+                  placeholder={product?.property ?? ""}
                   autoComplete="property"
                   required
                   className={fieldClass}
@@ -105,6 +126,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                   id="product_utility"
                   name="utility"
                   type="text"
+                  placeholder={product?.utility??""}
                   autoComplete="utility"
                   required
                   className={fieldClass}
@@ -112,7 +134,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                 <FieldError messages={state.fieldErrors?.utility} />
               </div>
 
-            <div>
+              <div>
                 <label htmlFor="product_price" className={labelClass}>
                   Price
                 </label>
@@ -120,14 +142,20 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                   id="product_price"
                   name="price"
                   type="number"
+                  placeholder={product?.price?.toString() ?? ""}
                   autoComplete="price"
                   required
                   className={fieldClass}
                 />
                 <FieldError messages={state.fieldErrors?.price} />
               </div>
-              <SubmitButton pending={pending} label="Change Products" />
+              <div className="h-[300px]">
+
+              </div>
+              <SubmitButton pending={pending} label="Save Change" />
+              </div>
             </div>
+            </div> 
           </article>  
         </form>
         <form action={deleteAction} className="flex flex-col gap-4" noValidate>

@@ -3,7 +3,7 @@ import { requireAdmin } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { NotebookPen } from "lucide-react";
-
+                
 // async function searchProducts(query:string){
 //   if(!query || query.trim() === ""){
 //     return []
@@ -25,7 +25,7 @@ import { NotebookPen } from "lucide-react";
 //     console.log("error!", error);
 //     return [];
 //   }
-// }
+// }                                  
 
 export default async function ProductsListPage() {
   await requireAdmin();
