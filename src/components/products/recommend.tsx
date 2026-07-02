@@ -11,14 +11,14 @@ export default function Recommend() {
                 >
                 <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
                     <div>
-                        <h3 className="pt-1 pl-5 truncate text-2xl font-bold leading-snug text-onyx">
+                        <h3 className="pt-1 truncate text-2xl font-bold leading-snug text-onyx">
                             Product Purchased
                         </h3>
-                        <p className="pl-5 font-spartan text-2xl font-bold text-blue-600">
+                        <p className="font-spartan text-2xl font-bold text-blue-600">
                             765                            
                         </p>
-                        <div className="pl-5 text-md text-neutral-200 flex justify-center items-center gap-2">
-                            <ChartLine className="mr-2 line-block h-4 w-4" />
+                        <div className="text-md text-neutral-500 flex items-center gap-2">
+                            <ChartLine className="line-block h-4 w-4" />
                             + 2.6 % last week
                         </div>
                     </div>
@@ -29,14 +29,14 @@ export default function Recommend() {
                 >
                 <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
                     <div>
-                        <h3 className="pt-1 pl-5 truncate text-2xl font-bold leading-snug text-onyx">
+                        <h3 className="pt-1 truncate text-2xl font-bold leading-snug text-onyx">
                             Total balance
                         </h3>
-                        <p className="pl-5 font-spartan text-2xl font-bold text-blue-600">
+                        <p className="font-spartan text-2xl font-bold text-blue-600">
                             19,830                           
                         </p>
-                        <div className="pl-5 text-md text-neutral-500 flex justify-center items-center gap-2">
-                            <ChartLine className="mr-2 line-block h-4 w-4" />
+                        <div className="text-md text-neutral-500 flex items-center gap-2">
+                            <ChartLine className="line-block h-4 w-4" />
                             - 0.6 %last week
                         </div>
                     </div>
@@ -47,14 +47,14 @@ export default function Recommend() {
                 >
                 <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
                     <div>
-                        <h3 className="pt-1 pl-5 truncate text-2xl font-bold leading-snug text-onyx">
+                        <h3 className="pt-1 truncate text-2xl font-bold leading-snug text-onyx">
                             Sales profit
                         </h3>
-                        <p className="pl-5 font-spartan text-2xl font-bold text-blue-600">
+                        <p className="font-spartan text-2xl font-bold text-blue-600">
                             4,765                            
                         </p>
-                        <div className="pl-5 text-md text-neutral-500 flex justify-center items-center gap-2">
-                            <ChartLine className="mr-2 line-block h-4 w-4" />
+                        <div className="text-md text-neutral-500 flex items-center gap-2">
+                            <ChartLine className="line-block h-4 w-4" />
                             + 0.6 %last week
                         </div>
                     </div>

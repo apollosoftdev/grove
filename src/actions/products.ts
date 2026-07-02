@@ -37,11 +37,11 @@ export async function createProduct(
           property: String(newProducts.property),
           utility: String(newProducts.utility || ''),
           price: Number(newProducts.price),
-           images: {
-              create: [
-                { url: String(newProducts.image || "") }
-              ]
-            },
+          //  images: {
+          //     create: [
+          //       { url: String(newProducts.image || "") }
+          //     ]
+          //   },
         },
       });
 

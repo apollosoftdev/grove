@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { getTopProducts } from "@/actions/topreview";
 import Recommend from "@/components/products/recommend";
+import { Advertisement } from "@/components/advertisement";
 
 export default async function HomePage() {
   // const session = await auth();
@@ -19,36 +20,53 @@ export default async function HomePage() {
 
   
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-[#f6faf5]">
       <SiteHeader />
-
       <div className="flex items-center justify-center">
-        <div className="w-full max-w-6xl text-center pb-2">
-          <div className="bg-gray-600 flex gap-4 rounded-xl">
-            <div className="w-[600px]">
-              <p className="text-xl px-3 mt-10 text-[#c6f24e]">
+        <div className="w-full pb-2">
+          <div className="bg-[#1f5236] flex gap-4">
+            <div className="flex justify-center">
+            <div className="w-1/2">
+              <p className="text-xl px-3 mt-20 text-[#c6f24e]">
                 GreenHouse-Grown Shipped in 48H
               </p>
-              <p className="text-4xl px-3 mt-10 font-bold tracking-tight text-ink sm:text-5xl">
-                Products here make your life better
+              <p className="text-7xl px-3 mt-10 font-bold tracking-tight text-white">
+                Plants that actually <span className="text-[#c6f24e]">survive</span> our apartment
               </p>
-              <p className="text-lg px-5 mt-10 text-gray-900">
+              <p className="text-lg px-5 mt-10 text-gray-400">
                 We match every plant to your lifestyle, your home, and your space. Our team of experts will help you find the perfect products for your needs.
               </p>
-              <div className="flex justify-center py-3">
+              <div className="flex justify-evenly py-3 my-5">
+                <Link
+                href="/products"
+                className="flex items-center gap-2 border border-[#c6f24e] rounded-md bg-[#c6f24e] px-4 py-2 font-semibold text-[#1f5236] transition duration-300 shadow-md hover:-translate-y-1 hover:shadow-xl"
+              >
+                CardShop 
+              </Link>
                 <Link
                 href="/purchase"
-                className="flex items-center gap-2 rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                className="flex items-center gap-2 border border-[#c6f24e] rounded-md bg-[#1f5236] px-4 py-2 font-semibold text-white transition  duration-300 shadow-md hover:-translate-y-1 hover:shadow-xl"
               >
                 Find my matches
               </Link>
               </div>
             </div>
+            </div>
             <div>
             </div>
+          </div>  
+          <div className="flex justify-center bg-[#2f7d4f]">
+            <div className="max-w-6xl ">
+              <Advertisement />
+            </div>
           </div>
-          <Recommend />
-          <div className="grid grid-cols-3 space-y-5 mt-5 gap-10">
+          <div className="flex justify-center ">
+            <div className="max-w-6xl">
+              <Recommend />
+            </div>
+          </div>
+          <div className="flex justify-center">
+          <div className="grid grid-cols-3 space-y-5 mt-5 gap-10 max-w-6xl">
           {products.map((product) =>
             <article
                 key={product.id}
@@ -83,8 +101,9 @@ export default async function HomePage() {
                   </div>
                 </div>
               </article>  
-          )}
-        </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
