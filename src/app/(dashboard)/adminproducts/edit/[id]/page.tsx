@@ -59,7 +59,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
         </h1>
       </div>
       <div className="space-y-6 flex justify-center flex-col items-center">
-          <form action={formAction} className="flex flex-col gap-4" noValidate>
+        <form action={formAction} className="flex flex-col gap-4" noValidate>
           <input type="hidden" name="id" value={id} />
           <article
             className="w-[250px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"

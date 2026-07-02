@@ -26,10 +26,8 @@ export default async function user_products(){
       {/* <aside className="border-b border-black/10 md:w-56 md:shrink-0 md:border-b-0 md:border-r dark:border-white/10">
             <DashboardSidebar isAdmin={isAdmin} />
           </aside> */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <div className="space-y-6">
+        <div className="flex flex-wrap items-center gap-3">
             <UserProductsPage products={products_list || []} />
-          </div>
         </div>
       {/* </main> */}
     </div>
