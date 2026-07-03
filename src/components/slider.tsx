@@ -12,11 +12,11 @@ interface AmountSliderProps {
 }
 
 export default function AmountSlider({
-  min = 0,
-  max = 1000,
-  step = 10,
+  min = 50,
+  max = 500,
+  step = 5,
   currency = "$",
-  initialValue = 1000,
+  initialValue = 500,
   onChange,
 }: AmountSliderProps) {
   const [value, setValue] = useState<number>(initialValue);

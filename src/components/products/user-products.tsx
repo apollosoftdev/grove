@@ -126,6 +126,13 @@ export default function UserProductsPage({ products }: ProductListProps) {
               >
                 <button type="button" onClick={() => handleSelectProduct(product)} key={product.id}>
                 <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
+                    <Link
+                      href={`products/${product.id}`}
+                      className="flex items-center rounded-md bg-gray-900 px-2 py-1 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                    >
+                      <MessageSquareText className="w-4 h-4 mr-1" />
+                      image
+                    </Link>
                   {/* <img
                     src={product.image?? ""}
                     alt=""
