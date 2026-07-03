@@ -22,6 +22,7 @@ export default async function user_products(){
 
   return (
     <div className="flex min-h-screen flex-col">
+
       {/* <main className="flex w-full max-w-6xl flex-1 flex-col justify-center md:flex-row gap-25 mx-auto"> */}
       {/* <aside className="border-b border-black/10 md:w-56 md:shrink-0 md:border-b-0 md:border-r dark:border-white/10">
             <DashboardSidebar isAdmin={isAdmin} />

@@ -1,13 +1,13 @@
 'use client';
 import Link from "next/link";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useEffect, useRef } from "react";
 import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
 import DetailProduct from "@/components/products/detailproduct";
 import { Pin } from "lucide-react";
-import { MessageSquareText, HeartPlus } from "lucide-react";
-
+import { MessageSquareText, HeartPlus, Search } from "lucide-react";
+import ProductDropdown from "../productdropdown";
 // 1. Define the shape of a single product
 type Product = {
   id: string;
@@ -46,6 +46,8 @@ export default function UserProductsPage({ products }: ProductListProps) {
 
   const [state, formAction, ispending] = useActionState(addToCartAction, initialstate);
   const [detail, setDetail] = useState<Product>(initialDetailState);
+  const [query, setQuery] = useState("");
+  const [option, setOption] = useState("");
 
   const handleSelectProduct = (product: Product) => {
     setDetail({
@@ -56,6 +58,16 @@ export default function UserProductsPage({ products }: ProductListProps) {
       price: product.price,
     });
   };
+  
+  const handleDropDownChange = (type:string) => {
+    setOption(type);
+    if(type==="All"){
+      setOption("");
+    }
+  }
+  const searchedProducts = products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase()));
+
+  const optionSearchProducts =  searchedProducts.filter((product) => product.property.toLowerCase().includes(option.toLowerCase()));
 
   return (
     <div className="space-y-3">
@@ -63,13 +75,27 @@ export default function UserProductsPage({ products }: ProductListProps) {
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
         Products list
         </h1>
-          {products &&
+          {optionSearchProducts &&
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {products.length} registered {products.length === 1 ? "product" : "products"}
+              {optionSearchProducts.length} registered {optionSearchProducts.length === 1 ? "product" : "products"}
             </p>
           }
       </div>
-      
+      <div className="flex gap-3">
+        <div className="flex border border-gray-200 p-2 rounded-lg max-w-[250px]">
+          <Search className="w-4 h-4 mt-1 mr-1 text-gray-500"/>
+          <input
+            type="text"
+            placeholder="Search for Products ..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="focus-visible focus:outline-none"
+          />
+        </div>
+        <div className="flex max-w-[250px]">
+          <ProductDropdown onSelectProduct={handleDropDownChange} />
+        </div>
+      </div>
       <div className="mt-8 z-50"> 
         {detail.utility ? ( 
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={() => setDetail(initialDetailState)}>
@@ -81,7 +107,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
       </div>
       <div className="rounded-xl bg-white shadow-sm dark:bg-white/5">
         <div className="grid lg:grid-cols-5 space-y-5 gap-10 md:grid-cols-3">
-          {products.map((product) => (
+          {optionSearchProducts.map((product) => (
               <article
                 key={product.id}
                 className="w-[250px] flex flex-row items-stretch overflow-hidden border border-black/10 rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-3 hover:shadow-md lg:flex-col"
