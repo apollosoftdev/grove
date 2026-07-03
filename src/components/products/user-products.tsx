@@ -6,6 +6,7 @@ import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
 import DetailProduct from "@/components/products/detailproduct";
 import { Pin } from "lucide-react";
+import { MessageSquareText, HeartPlus } from "lucide-react";
 
 // 1. Define the shape of a single product
 type Product = {
@@ -117,8 +118,9 @@ export default function UserProductsPage({ products }: ProductListProps) {
                   <div className="flex justify-center items-center gap-3">
                     <Link
                       href={`products/comment/${product.id}`}
-                      className="flex items-center rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                      className="flex items-center rounded-md bg-gray-900 px-2 py-1 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
                     >
+                      <MessageSquareText className="w-4 h-4 mr-1" />
                       comment
                     </Link>
                     <form action={formAction} >
@@ -126,9 +128,10 @@ export default function UserProductsPage({ products }: ProductListProps) {
                       <button
                       type="submit"
                       disabled={ispending}
-                      className="flex items-center rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                      className="flex items-center rounded-md bg-gray-900 px-2 py-1 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
                       >
-                      +favourite
+                      <HeartPlus className="w-4 h-4 mr-1" />
+                      favourite
                       </button>
                     </form>
                   </div>

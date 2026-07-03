@@ -3,6 +3,7 @@ import { useActionState, useState } from "react";
 import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
 import { ToastContainer, toast } from "react-toastify"; 
+import { HeartPlus } from "lucide-react";
 
 type Product = {
   id: string;
@@ -95,7 +96,8 @@ export default function DetailProduct( { detail }: { detail: Product }){
                       disabled={ispending}
                       className="flex ml-15 items-center rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
                       >
-                      +favourite
+                        <HeartPlus className="w-4 h-4 mr-1" />
+                        favourite
                       </button>
                     </form>
                     </div>

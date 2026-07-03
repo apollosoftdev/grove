@@ -2,6 +2,7 @@
 
 import { createCommets, type ProductFormState } from "@/actions/products";
 import { useActionState, useEffect, useState } from "react";
+import { Send, StarCheck, MailCheck, PencilLine } from "lucide-react";
 
 import { use } from 'react';
 
@@ -73,10 +74,16 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                     Review of product.
                   </h1>
                 </div>
-                <div className="border overflow-x-auto border-ink rounded-lg w-[600px] h-[500px] text-wrap">
+                <div className="border  space-y-3 sapce-x-3 overflow-x-auto border-ink rounded-lg w-[600px] h-[500px] text-wrap">
                   {products.map((product, index)=>(
-                    <div key={product.id ?? index} className="border border-ink rounded-lg w-[200px] h-[50px] break-words">
-                        {product.content}
+                    <div key={product.id ?? index} className="p-2">
+                      <PencilLine/>
+                      <div className="border border-ink rounded-lg mt-1 overflow-x-auto max-w-[500px]  break-words">
+                          {product.content}
+                          <div className="flex justify-end mb-1 mr-2">
+                            <MailCheck/>
+                          </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -85,19 +92,21 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
                     {/* <input type="hidden" name="userId" value={id} /> */}
                     <input type="hidden" name="rating" value={Number(selection)} />
                     <textarea name="comment" className="border border-ink rounded-lg my-5 w-[600px] h-[100px]" required/>
-                    <button disabled={pending} type="submit" className="flex ml-[400px] h-12 w-25 shrink-0 bg-[#163d2a] items-center justify-center rounded-lg border border-neutral-200 text-white transition hover:border-green-200 hover:bg-green-600" aria-label="Save to favorites">
+                    <button disabled={pending} type="submit" className="flex justify-end ml-[400px] rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200">
                         {pending ? "please wait ... " : "" }
-                        send
+                        <Send className="w-4 h-4 mt-1 mr-2"/>
+                        Send
                     </button>
                 </form> 
               </div>
               <div className="ml-30 space-x-3">
                 <div>
-                  <h1 className="text-xl font-semibold text-gray-900 dark:text-white mt-5">
+                  <h1 className="flex text-xl font-semibold text-gray-900 dark:text-white mt-5">
+                    <StarCheck className="w-5 h-5 mt-1"/>
                     {ratingChoice.question}
                   </h1>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-5 mt-10">
                   {ratingChoice.options.map((option) => {
                     const isChecked = selection === option.value;
                     return (

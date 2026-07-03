@@ -3,7 +3,7 @@ import { requireAdmin } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { NotebookPen } from "lucide-react";
-                
+
 // async function searchProducts(query:string){
 //   if(!query || query.trim() === ""){
 //     return []
@@ -110,8 +110,12 @@ export default async function ProductsListPage() {
                       href={`/adminproducts/edit/${product.id}`}
                       className="font-medium text-gray-700 transition hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                     >
-                      <NotebookPen className="w-4 h-4"/>
-                      Edit
+                      <div>
+                        <NotebookPen className="w-4 h-4"/>
+                      </div>
+                      <div>
+                        Edit
+                      </div>
                     </Link>
                   </td>
                 </tr>
