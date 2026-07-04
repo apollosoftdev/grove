@@ -83,7 +83,7 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
             <div className="flex">
             <div>
               <div className="w-[600px]">
-                <ImageUpload />
+                <ImageUpload fileId={id}/>
               </div>
             </div>
             <div className="w-[400px]">

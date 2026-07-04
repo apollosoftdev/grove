@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function ImageUpload(){
+export default function ImageUpload({ fileId }: { fileId: string }){
 
     const [ file, setFile ] = useState<File | null>(null);
     const [ uploading, setUploading ] = useState(false);
@@ -17,7 +17,7 @@ export default function ImageUpload(){
         if(!file) return;
         setUploading(true);
         try{
-            const res = await fetch('/api/upload', {
+            const res = await fetch(`/api/upload/${fileId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ fileName: file.name, contentType: file.type }),
@@ -51,6 +51,17 @@ export default function ImageUpload(){
             setUploading(false);
         }
     }
+   
+    const [fileUrl, setFileUrl] = useState<string | null>(null);
+
+    const handleFetchFile = async () => {
+        const res = await fetch(`/api/upload/${fileId}`);
+        const data = await res.json();
+        if (data.url) {
+        setFileUrl(data.url);
+        }
+    };
+
     return (
         <div className="border border-ink rounded-lg my-2 mx-2">
             <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)}/>
@@ -58,10 +69,14 @@ export default function ImageUpload(){
                 {uploading ? "Uplaoding..." : "" }
                 image upload
             </button>
-            {imageUrl && (
+            <button onClick={handleFetchFile} disabled={!file ||uploading}>
+                {uploading ? "Uplaoding..." : "" }
+               display
+            </button>
+            {fileUrl && (
                 <div className="mt-4">
                     <p className="text-xs text-gray-500 mb-1">Preview:</p>
-                    <img src={imageUrl} alt="Uploaded" width={300} className="rounded border" />
+                    <img src={fileUrl} alt="Uploaded" width={300} className="rounded border" />
                 </div>
             )}
         </div>

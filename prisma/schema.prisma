@@ -96,7 +96,7 @@ model FileToProduct{
   fileId        String
   file          File  @relation(fields: [fileId], references: [id], onDelete: Cascade)
 }
-
+  
 model File {
   id            String    @id @default(cuid()) 
   fileName      String
