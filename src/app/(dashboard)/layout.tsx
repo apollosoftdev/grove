@@ -15,7 +15,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={session.user} />
-
+    
       <div className="mx-auto flex w-full max-w-8xl flex-1 flex-col md:flex-row">
         <aside className="border-b border-black/10 md:w-80 md:shrink-0 md:border-b-0 md:border-r dark:border-white/10">
           <DashboardSidebar isAdmin={isAdmin} />

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify"; // Add toast
 import "react-toastify/dist/ReactToastify.css"; // Ensure CSS is imported
+import { ProductListImage } from "./products/productlistimage";
 
 type CartItem = {
   id: string;
@@ -82,28 +83,23 @@ export default function PurchaseProductList({
                 </span>
                 </td>
                 <td className="px-4 py-3">
-                {/* {product.image ?
-                    <img className="size-6" src={product.image} /> :
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200 text-lg">
-                    {product.name[0]}
-                    </span>
-                } */}
+                  {/* <ProductListImage fileId={item.id} /> */}
                 </td>
                 <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
-                {item.product.name ?? "-"}
+                  {item.product.name ?? "-"}
                 </td>
                 <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
-                {item.product.property ?? "-"}
+                  {item.product.property ?? "-"}
                 </td>
                 <td className="px-4 py-3">
-                <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                  <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                     {item.product.utility ?? "-"}
-                </span>
+                  </span>
                 </td>
                 <td className="px-4 py-3">
-                <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                  <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                     {item.product.price ?? 0}
-                </span>
+                  </span>
                 </td>
             </tr>            
             ))}

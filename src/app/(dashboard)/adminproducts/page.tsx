@@ -2,30 +2,8 @@
 import { requireAdmin } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { NotebookPen } from "lucide-react";
-
-// async function searchProducts(query:string){
-//   if(!query || query.trim() === ""){
-//     return []
-//   }
-
-//   try{
-//     const products = await prisma.product.findMany({
-//       where:{
-//         OR: [
-//           { name: { contains: query, mode: 'insensitive' } },
-//           { property: { contains: query, mode: 'insensitive' } },
-//           { utility: { contains: query, mode: 'insensitive' } }
-//         ]
-//       }
-//     });
-//     return products
-//   }
-//   catch(error){
-//     console.log("error!", error);
-//     return [];
-//   }
-// }                                  
+import { NotebookPen } from "lucide-react";                              
+import { ProductListImage } from "@/components/products/productlistimage";
 
 export default async function ProductsListPage() {
   await requireAdmin();
@@ -48,13 +26,7 @@ export default async function ProductsListPage() {
           {products.length} registered {products.length === 1 ? "product" : "products"}
         </p>
         </div>
-        {/* <input
-          type="text"
-          placeholder="Search products..."
-          value={searchQuery}
-          onChange={(e) => searchProducts(e.target.value)}
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        /> */}
+
       <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
@@ -79,6 +51,7 @@ export default async function ProductsListPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3">
+                    <ProductListImage fileId={product.id} />
                     {/* {product.image ?
                       <img className="size-6" src={product.image} /> :
                       <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200 text-lg">

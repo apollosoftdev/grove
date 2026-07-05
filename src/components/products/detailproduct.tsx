@@ -4,6 +4,7 @@ import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
 import { ToastContainer, toast } from "react-toastify"; 
 import { HeartPlus } from "lucide-react";
+import { ProductCard } from "./cardshopimage";
 
 type Product = {
   id: string;
@@ -54,13 +55,8 @@ export default function DetailProduct( { detail }: { detail: Product }){
 
     return (
         <div className="flex gap-5 bg-white rounded-2xl shadow-md">
-            <div className="relative w-[400px] min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
-                {/* <img
-                src={product.image?? ""}
-                alt=""
-                className="object-cover bg-green-100"
-                sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
-                /> */}
+            <div className="relative w-[500px] min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
+                <ProductCard fileId={detail.id} />
             </div>
             <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6 h-[500px]">
                 <div>

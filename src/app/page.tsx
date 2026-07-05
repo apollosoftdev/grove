@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { getTopProducts } from "@/actions/topreview";
 import Recommend from "@/components/products/recommend";
 import { Advertisement } from "@/components/advertisement";
+import { ProductCard } from "@/components/products/cardshopimage";
 
 export default async function HomePage() {
   // const session = await auth();
@@ -73,12 +74,7 @@ export default async function HomePage() {
                 className="w-[300px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
               >
                 <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
-                  {/* <img
-                    src={product.image?? ""}
-                    alt=""
-                    className="object-cover bg-green-100"
-                    sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
-                  /> */}  
+                  <ProductCard fileId={product.id} /> 
                 </div>
                 <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
                   <div>
@@ -100,6 +96,7 @@ export default async function HomePage() {
                   <div className="flex justify-end items-center gap-3">
                   </div>
                 </div>
+                
               </article>  
               )}
             </div>
