@@ -54,13 +54,23 @@ export default function ImageUpload({ fileId }: { fileId: string }){
    
     const [fileUrl, setFileUrl] = useState<string | null>(null);
 
-    const handleFetchFile = async () => {
-        const res = await fetch(`/api/upload/${fileId}`);
-        const data = await res.json();
-        if (data.url) {
-        setFileUrl(data.url);
-        }
-    };
+    useEffect(() =>{
+        async function handleFetchFile(){
+            try{
+                const res = await fetch(`/api/upload/${fileId}`);
+                const data = await res.json();
+                if (data.url) {
+                    setFileUrl(data.url);
+                }
+            }
+            catch(error)
+            {
+                console.log("error occured.")
+            }
+
+        };
+        handleFetchFile()
+    })
 
     return (
         <div className="border border-ink rounded-lg my-2 mx-2">
@@ -69,14 +79,14 @@ export default function ImageUpload({ fileId }: { fileId: string }){
                 {uploading ? "Uplaoding..." : "" }
                 image upload
             </button>
-            <button onClick={handleFetchFile} disabled={!file ||uploading}>
+            {/* <button onClick={handleFetchFile} disabled={!file ||uploading}>
                 {uploading ? "Uplaoding..." : "" }
                display
-            </button>
+            </button> */}
             {fileUrl && (
                 <div className="mt-4">
                     <p className="text-xs text-gray-500 mb-1">Preview:</p>
-                    <img src={fileUrl} alt="Uploaded" width={300} className="rounded border" />
+                    <img src={fileUrl} alt="Uploaded" width={600} className="rounded border" />
                 </div>
             )}
         </div>

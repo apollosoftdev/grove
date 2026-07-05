@@ -9,6 +9,7 @@ import { Pin } from "lucide-react";
 import { MessageSquareText, HeartPlus, Search } from "lucide-react";
 import ProductDropdown from "../productdropdown";
 import AmountSlider from "../slider";
+import { ProductCard } from "./cardshopimage";
 
 // 1. Define the shape of a single product
 type Product = {
@@ -50,7 +51,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
   const [detail, setDetail] = useState<Product>(initialDetailState);
   const [query, setQuery] = useState("");
   const [option, setOption] = useState("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(500);
 
   const handleSelectProduct = (product: Product) => {
     setDetail({
@@ -126,15 +127,18 @@ export default function UserProductsPage({ products }: ProductListProps) {
               >
                 <button type="button" onClick={() => handleSelectProduct(product)} key={product.id}>
                 <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
-                    <Link
+                    {/* <Link
                       href={`products/${product.id}`}
                       className="flex items-center rounded-md bg-gray-900 px-2 py-1 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
                     >
                       <MessageSquareText className="w-4 h-4 mr-1" />
                       image
-                    </Link>
+                    </Link> */}
+                    {/* <input type="hidden" onChange={setFileId(product.id)} /> */}
+                    <ProductCard fileId={product.id} />
                   {/* <img
-                    src={product.image?? ""}
+                    onLoad={() => setFileId(product.id)}
+                    src={imageUrl || ""} 
                     alt=""
                     className="object-cover bg-green-100"
                     sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
