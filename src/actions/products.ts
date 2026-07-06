@@ -120,7 +120,27 @@ export async function deleteProduct(
     }
 }
 
+export async function deleteCartItem(
+  _prevState: ProductFormState,
+  formData: FormData
+):Promise<ProductFormState> {
+  const id = formData.get("id") as string;
 
+  try {
+    await prisma.cartItem.delete({where: { id }});
+
+    revalidatePath("/"); 
+    revalidatePath("/admin/products"); 
+    return { success: true };
+
+    } catch (error) {
+      // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
+      if (error) {
+        return { error: "Invalid email or password." };
+      }
+      throw error;
+    }
+}
 
 export async function createCommets(
   _prevState: ProductFormState,

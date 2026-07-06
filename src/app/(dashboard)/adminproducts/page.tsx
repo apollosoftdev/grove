@@ -61,7 +61,7 @@ export default function ProductsListPage() {
 
     // Construct FormData and manually trigger the useActionState action
     const formData = new FormData(e.currentTarget);
-    startTransition(() => {
+    startTransition(() => { 
       deleteAction(formData);
     });
   };

@@ -1,12 +1,15 @@
 "use client"; // Required to trigger client-side events and toast alerts
 
-import { useState } from "react";
+import { useState, useActionState, startTransition } from "react";
 import { ToastContainer, toast } from "react-toastify"; // Add toast
 import "react-toastify/dist/ReactToastify.css"; // Ensure CSS is imported
 import { ProductListImage } from "./products/productlistimage";
+import { Trash2 } from "lucide-react";
+import { deleteCartItem, type ProductFormState } from "@/actions/products";
 
 type CartItem = {
   id: string;
+  quantity?:number;
   product: {
     name?: string;
     property?: string;
@@ -15,6 +18,23 @@ type CartItem = {
   };
 };
 
+const initialState : ProductFormState= {
+    success: false
+};
+
+function SubmitButton({ pending, label }: { pending: boolean; label: string }) {
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full flex  gap-2 rounded-md bg-gray-900 px-2 py-1 text-sm font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+    >
+      <Trash2 className="w-4 h-4"/>
+      {pending ? "" : label}
+    </button>
+  );
+}
+
 export default function PurchaseProductList({
   carts = [],
   userId, 
@@ -22,6 +42,8 @@ export default function PurchaseProductList({
   carts?: CartItem[];
   userId: string ;
 }) {
+  const [deleteState, deleteAction, deletePending] = useActionState(deleteCartItem, initialState);
+
   const totalPrice = carts.reduce((sum, item) => {
     return sum + (item.product.price ?? 0);
   }, 0);
@@ -45,19 +67,37 @@ export default function PurchaseProductList({
           createdAt: new Date().toISOString(),
           id: Id
         })
-      }); 
+      });
+    };
+
+  const handleDeleteSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault(); // Stop immediate execution
+      
+      const confirmed = window.confirm("Are you sure you want to delete this product?");
+      if (!confirmed) return; // Halt if they click cancel
   
+      // Construct FormData and manually trigger the useActionState action
+      const formData = new FormData(e.currentTarget);
+      startTransition(() => {
+        deleteAction(formData);
+      });
     };
 
   return (
     <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-        user
-        </h2>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-        You have user access.
-        </p>
-        <table className="w-full text-left text-sm">
+      <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+        The products you select.
+      </h2>
+      <div className="relative left-[80%]">
+        <form onSubmit={handleSubmit}>
+          <button
+          type="submit"
+          className="flex items-center gap-2 rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white">
+            Purchase
+          </button> 
+        </form>
+      </div> 
+        <table className="w-full text-left text-sm mt-2">
         <thead className="border-b border-black/10 bg-black/[0.02] text-xs uppercase tracking-wide text-gray-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
             <tr>
             <th className="px-4 py-3 font-medium">No</th>
@@ -66,6 +106,8 @@ export default function PurchaseProductList({
             <th className="px-4 py-3 font-medium">Property</th>
             <th className="px-4 py-3 font-medium">Utility</th>
             <th className="px-4 py-3 font-medium">Price</th>
+            <th className="px-4 py-3 font-medium">Quantity</th>
+            <th className="px-4 py-3 font-medium">edit</th>
             </tr>
         </thead>
         <tbody className="divide-y divide-black/5 dark:divide-white/5">
@@ -101,19 +143,21 @@ export default function PurchaseProductList({
                     {item.product.price ?? 0}
                   </span>
                 </td>
+                <td className="px-4 py-3">
+                  <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                    {item.quantity ?? 0}
+                  </span>
+                </td>
+                <td>
+                  <form onSubmit={handleDeleteSubmit} className="flex flex-col mt-1" noValidate>
+                    <input type="hidden" name="id" value={item.id} />
+                    <SubmitButton pending={deletePending} label="Cancel" />
+                  </form>
+                </td>
             </tr>            
             ))}
           </tbody>
           </table>
-          <div className="flex justify-end">
-            <form onSubmit={handleSubmit}>
-              <button
-              type="submit"
-              className="flex items-center gap-2 rounded-md bg-gray-900 px-4 py-2 font-semibold text-white transition hover:bg-gray-700 dark:bg-white">
-                Purchase
-              </button>
-            </form>
-          </div> 
           <ToastContainer position="top-right"  />
       </section>
           
