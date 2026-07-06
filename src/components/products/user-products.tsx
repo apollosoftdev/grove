@@ -5,7 +5,6 @@ import { useActionState, useState, useEffect, useRef } from "react";
 import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
 import DetailProduct from "@/components/products/detailproduct";
-import { Pin } from "lucide-react";
 import { MessageSquareText, HeartPlus, Search } from "lucide-react";
 import ProductDropdown from "../productdropdown";
 import AmountSlider from "../slider";
@@ -127,12 +126,12 @@ export default function UserProductsPage({ products }: ProductListProps) {
             <div className="flex justify-center items-center">Product NO: {startIndex} ~ {endIndex}</div>
               <div>
                 <button 
-                  className={`w-full flex justify-between items-center px-4 py-3 bg-white border p-2 rounded-lg border-gray-200 rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===1 ? 'opacity-50 cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
+                  className={`w-full flex justify-between items-center px-4 py-3 bg-white border p-2 rounded-lg border-gray-300 rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===1 ? 'cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
                   onClick={() => setPage(page-1)}
                   disabled={page === 1}
                   type="button"
                   >
-                  <ChevronLeft className="w-5 h-5"/>
+                  <ChevronLeft className="w-5 h-5 text-gray-700"/>
                 </button>
               </div>
               <div>
@@ -140,8 +139,8 @@ export default function UserProductsPage({ products }: ProductListProps) {
               </div>
               <div>
                 <button 
-                  className={`w-full flex justify-between items-center px-4 py-3 bg-white border border-gray-200 p-2 rounded-lg rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===1 ? 'opacity-50 cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
-                  onClick={() =>setPage(page+1)}
+                  className={`w-full flex justify-between items-center px-4 py-3 bg-white border p-2 rounded-lg border-gray-300 rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===5 ? 'cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
+                  onClick={() => setPage(page+1)}
                   disabled={page === 5}
                   type="button"
                   >

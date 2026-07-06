@@ -94,9 +94,9 @@ export default function ProductsListPage() {
             </thead>
             <tbody className="divide-y divide-black/5 dark:divide-white/5">
               {products.map((product, index) => (
-                <tr key={product.id} className="hover:bg-gray-200 ">
-                  <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                <tr key={product.id} className="hover:bg-gray-100 ">
+                  <td className="px-4 py-3 text-black dark:text-gray-100">
+                    <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                       {index + 1}
                     </span>
                   </td>
@@ -109,19 +109,19 @@ export default function ProductsListPage() {
                       </span>
                     } */}
                   </td>
-                  <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
+                  <td className="px-4 py-3 text-black dark:text-gray-100">
                     {product.name ?? "-"}
                   </td>
                   <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
                     {product.property ?? "-"}
                   </td>
-                  <td className="px-4 py-3">
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                  <td className="px-4 py-3 w-[500px] overflow-hiddne">
+                    <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                       {product.utility ?? "-"}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                    <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                       {product.price ?? 0}
                     </span>
                   </td>

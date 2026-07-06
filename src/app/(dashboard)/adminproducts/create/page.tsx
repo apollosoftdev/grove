@@ -10,7 +10,7 @@ function SubmitButton({ pending, label }: { pending: boolean; label: string }) {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-md bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+      className="w-[200px] mt-3 rounded-md bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
     >
       {pending ? "Please wait…" : label}
       
@@ -44,89 +44,94 @@ export default function createProductPage() {
         </h1>
       </div>
       <div className="space-y-6 flex justify-center flex-col items-center">
-        <article
-            className="w-[1000px] h-[700px] overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
-          >
-          <div className="flex">
-            <div className="w-[600px]">
-              {/* <ImageUpload /> */}
+        <form action={formAction} className="flex flex-col gap-4" noValidate>
+          <article
+              className="w-[1000px] h-[700px] overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
+            >
+            <div className="flex">
+              <div className="w-[600px]">
+                {/* <ImageUpload fileId={id}/> */}
+              </div>
+            {/* <div className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+              <ProductCreateForm />
+            </div> */}
+            <div className="w-[400px]">
+              <div className="">
+                <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                  <div>
+                    <label htmlFor="product_name" className={labelClass}>
+                      Name
+                    </label>
+                    <input
+                      id="product_name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      required
+                      className={fieldClass}
+                    />
+                    <FieldError messages={state.fieldErrors?.name} />
+                  </div>
+                </div>
+                <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                  <div>
+                  <label htmlFor="product_property" className={labelClass}>
+                    property
+                  </label>
+                  <input
+                    id="product_property"
+                    name="property"
+                    type="text"
+                    autoComplete="property"
+                    required
+                    className={fieldClass}
+                  />
+                  <FieldError messages={state.fieldErrors?.property} />
+                </div>
+              </div>
+              <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <div>
+                <label htmlFor="product_utility" className={labelClass}>
+                  Utility
+                </label>
+                <input
+                  id="product_utility"
+                  name="utility"
+                  type="text"
+                  autoComplete="utility"
+                  required
+                  className={fieldClass}
+                />
+                <FieldError messages={state.fieldErrors?.utility} />
+                </div>
+              </div>
+              <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <div>
+                <label htmlFor="product_price" className={labelClass}>
+                  Price
+                </label>
+                <input
+                  id="product_price"
+                  name="price"
+                  type="number"
+                  autoComplete="price"
+                  required
+                  className={fieldClass}
+                />
+                  <FieldError messages={state.fieldErrors?.price} />
+                </div>
+              </div>
+              <div className="h-[150px] bg-gray-300"></div>
+              <div className="flex justify-center">
+                <SubmitButton pending={pending} label="Create Products" />
+              </div>
+              </div>
             </div>
           </div>
-          {/* <div className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <ProductCreateForm />
-          </div> */}
-
-          <form action={formAction} className="flex flex-col gap-4" noValidate>
-          <div className="w-[400px]">
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
-            <div>
-              <label htmlFor="product_name" className={labelClass}>
-                Name
-              </label>
-              <input
-                id="product_name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                className={fieldClass}
-              />
-              <FieldError messages={state.fieldErrors?.name} />
-            </div>
-          </div>
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
-            <div>
-            <label htmlFor="product_property" className={labelClass}>
-              property
-            </label>
-            <input
-              id="product_property"
-              name="property"
-              type="text"
-              autoComplete="property"
-              required
-              className={fieldClass}
-            />
-            <FieldError messages={state.fieldErrors?.property} />
-          </div>
-          </div>
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
-            <div>
-            <label htmlFor="product_utility" className={labelClass}>
-              Utility
-            </label>
-            <input
-              id="product_utility"
-              name="utility"
-              type="text"
-              autoComplete="utility"
-              required
-              className={fieldClass}
-            />
-            <FieldError messages={state.fieldErrors?.utility} />
-            </div>
-          </div>
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
-            <div>
-            <label htmlFor="product_price" className={labelClass}>
-              Price
-            </label>
-            <input
-              id="product_price"
-              name="price"
-              type="number"
-              autoComplete="price"
-              required
-              className={fieldClass}
-            />
-            <FieldError messages={state.fieldErrors?.price} />
-            </div>
-          </div>
-          <SubmitButton pending={pending} label="Create Products" />
-          </div>
-        </form>
-      </article>
+        </article>
+      </form>
     </div>
+    
     </>
   );
 }

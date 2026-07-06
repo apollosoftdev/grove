@@ -17,13 +17,7 @@ export async function requireUser() {
 export async function requirePublicUser() {
   const session = await auth();
   if (!session?.user) {
-    return {
-        id: "",
-        email: "",
-        name: "",
-        image: "",
-        role: "USER"
-      }
+    redirect("/publicproducts");
   }
   return session;
 }
