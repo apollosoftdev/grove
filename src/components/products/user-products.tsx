@@ -10,6 +10,8 @@ import { MessageSquareText, HeartPlus, Search } from "lucide-react";
 import ProductDropdown from "../productdropdown";
 import AmountSlider from "../slider";
 import { ProductCard } from "./cardshopimage";
+import Pagination from "../pagination";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 // 1. Define the shape of a single product
 type Product = {
@@ -52,6 +54,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
   const [query, setQuery] = useState("");
   const [option, setOption] = useState("");
   const [value, setValue] = useState(500);
+  const [page, setPage] = useState(1);
 
   const handleSelectProduct = (product: Product) => {
     setDetail({
@@ -73,11 +76,21 @@ export default function UserProductsPage({ products }: ProductListProps) {
   const handlePriceChange = (value: number) => {
     setValue(value)
   }
+  
+  const handlePageChange = (page: number) => {
+    setPage(page)
+  }
+
   const searchedProducts = products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase()));
 
   const optionSearchProducts =  searchedProducts.filter((product) => product.property.toLowerCase().includes(option.toLowerCase()));
 
   const maxPriceProducts =  optionSearchProducts.filter((product) => product.price < value);
+
+  const limit = 10; 
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const pageProducts = maxPriceProducts.slice(startIndex, endIndex);
 
   return (
     <div className="space-y-3">
@@ -108,6 +121,36 @@ export default function UserProductsPage({ products }: ProductListProps) {
         <div className="flex max-w-[500px]">
           <AmountSlider onChange={handlePriceChange}/>
         </div>
+        <div className="flex gap-3">
+          {page > 0 && page <= 5 ? (
+            <>
+            <div className="flex justify-center items-center">Product NO: {startIndex} ~ {endIndex}</div>
+              <div>
+                <button 
+                  className={`w-full flex justify-between items-center px-4 py-3 bg-white border p-2 rounded-lg border-gray-200 rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===1 ? 'opacity-50 cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
+                  onClick={() => setPage(page-1)}
+                  disabled={page === 1}
+                  type="button"
+                  >
+                  <ChevronLeft className="w-5 h-5"/>
+                </button>
+              </div>
+              <div>
+                <Pagination onChange={handlePageChange}/>
+              </div>
+              <div>
+                <button 
+                  className={`w-full flex justify-between items-center px-4 py-3 bg-white border border-gray-200 p-2 rounded-lg rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===1 ? 'opacity-50 cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
+                  onClick={() =>setPage(page+1)}
+                  disabled={page === 5}
+                  type="button"
+                  >
+                  <ChevronRight className="w-5 h-5"/>
+                </button>
+              </div>
+            </>
+        ):null}
+      </div>
       </div>
       <div className="mt-8 z-50"> 
         {detail.utility ? ( 
@@ -120,29 +163,14 @@ export default function UserProductsPage({ products }: ProductListProps) {
       </div>
       <div className="rounded-xl bg-white shadow-sm dark:bg-white/5">
         <div className="grid lg:grid-cols-5 space-y-5 gap-10 md:grid-cols-3">
-          {maxPriceProducts.map((product) => (
+          {pageProducts.map((product) => (
               <article
                 key={product.id}
                 className="w-[250px] flex flex-row items-stretch overflow-hidden border border-black/10 rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-3 hover:shadow-md lg:flex-col"
               >
                 <button type="button" onClick={() => handleSelectProduct(product)} key={product.id}>
                 <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
-                    {/* <Link
-                      href={`products/${product.id}`}
-                      className="flex items-center rounded-md bg-gray-900 px-2 py-1 font-semibold text-white transition hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-                    >
-                      <MessageSquareText className="w-4 h-4 mr-1" />
-                      image
-                    </Link> */}
-                    {/* <input type="hidden" onChange={setFileId(product.id)} /> */}
-                    <ProductCard fileId={product.id} />
-                  {/* <img
-                    onLoad={() => setFileId(product.id)}
-                    src={imageUrl || ""} 
-                    alt=""
-                    className="object-cover bg-green-100"
-                    sizes="(max-width: 1023px) 40vw, (max-width: 1280px) 50vw, 33vw"
-                  /> */}
+                    {/* <ProductCard fileId={product.id} /> */}
                 </div>
                 <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
                   <div>

@@ -70,7 +70,7 @@ export default function ImageUpload({ fileId }: { fileId: string }){
 
         };
         handleFetchFile()
-    })
+    },[fileId])
 
     return (
         <div className="border border-ink rounded-lg my-2 mx-2">

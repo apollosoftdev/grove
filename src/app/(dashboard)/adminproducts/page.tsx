@@ -101,7 +101,7 @@ export default function ProductsListPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <ProductListImage fileId={product.id} />
+                    {/* <ProductListImage fileId={product.id} /> */}
                     {/* {product.image ?
                       <img className="size-6" src={product.image} /> :
                       <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200 text-lg">

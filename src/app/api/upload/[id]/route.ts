@@ -57,7 +57,7 @@ export async function POST(request: Request, {params}: { params: Promise<{ id: s
                 create: {
                     productId:  id
                       }
-                  }
+                  } 
             }});
 
         return NextResponse.json({ uploadUrl: presignedUrl, file: savedFile }, { status: 201 });
@@ -86,11 +86,15 @@ export async function GET(
           }
        } 
     });
-    
+
     if (!fileRecord) {
       return NextResponse.json({ error: 'File not found' }, { status: 404 });
     }
 
+    const firstImage = fileRecord.image?.[0]?.file;
+    if (!firstImage || !firstImage.fileName) {
+      return NextResponse.json({ error: 'No image found for this product' }, { status: 400 });
+    }
     // 2. Generate a pre-signed URL (expires in 1 hour / 3600 seconds)
     const url = await minioClient.presignedGetObject(
       process.env.MINIO_BUCKET_NAME as string,
