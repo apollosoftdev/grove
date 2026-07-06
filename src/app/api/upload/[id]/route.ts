@@ -74,7 +74,6 @@ export async function GET(
 ) {
   const resolvedParams = await params;
   const id = resolvedParams.id;
-    console.log(id);
   try {
     // 1. Fetch file record from Prisma using the file ID
     const fileRecord = await prisma.product.findFirst({
@@ -82,12 +81,7 @@ export async function GET(
         include: {
           image: {         // Include the FileToProduct relation
             include: {
-              file: {      // Include the actual File relation
-                select: {
-                  bucket: true, // Select only the bucket field
-                  fileName:true,
-                }
-              }
+              file: true
             }
           }
        } 

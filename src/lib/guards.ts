@@ -14,6 +14,20 @@ export async function requireUser() {
   return session;
 }
 
+export async function requirePublicUser() {
+  const session = await auth();
+  if (!session?.user) {
+    return {
+        id: "",
+        email: "",
+        name: "",
+        image: "",
+        role: "USER"
+      }
+  }
+  return session;
+}
+
 export async function requireAdmin() {
   const session = await auth();
   if (!session?.user) {

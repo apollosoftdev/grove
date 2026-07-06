@@ -45,16 +45,19 @@ export default function createProductPage() {
       </div>
       <div className="space-y-6 flex justify-center flex-col items-center">
         <article
-            className="w-[250px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
+            className="w-[1000px] h-[700px] overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
           >
-          <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
-            <ImageUpload />
+          <div className="flex">
+            <div className="w-[600px]">
+              <ImageUpload />
+            </div>
           </div>
           {/* <div className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
             <ProductCreateForm />
           </div> */}
-          <form action={formAction} className="flex flex-col gap-4" noValidate>
 
+          <form action={formAction} className="flex flex-col gap-4" noValidate>
+          <div className="w-[400px]">
           <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
             <div>
               <label htmlFor="product_name" className={labelClass}>
@@ -120,7 +123,7 @@ export default function createProductPage() {
             </div>
           </div>
           <SubmitButton pending={pending} label="Create Products" />
-          
+          </div>
         </form>
       </article>
     </div>
