@@ -49,7 +49,7 @@ export default function createProductPage() {
           >
           <div className="flex">
             <div className="w-[600px]">
-              <ImageUpload />
+              {/* <ImageUpload /> */}
             </div>
           </div>
           {/* <div className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">

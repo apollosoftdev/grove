@@ -5,6 +5,9 @@ import SalesBarChart from "@/components/admin/barchart";
 import SignalLineChart from "@/components/admin/signalchart";
 import Circlechart from "@/components/admin/circlechart";
 import ConcentricChart from "@/components/admin/concentricchart";
+import { getTopProducts } from "@/actions/topreview";
+import { ProductCard } from "@/components/products/cardshopimage";
+import Recommend from "@/components/products/recommend";
 
 type CartItem = {
   id: string
@@ -26,9 +29,10 @@ export default async function productlist({
   const { error } = await searchParams;
   const isAdmin = session.user.role === "ADMIN";
 
-  const carts: CartItem[]  = await prisma.cartItem.findMany({
-    include: { product: true}
-  })
+  const result = await getTopProducts();
+  const products = Array.isArray(result.topProducts)
+  ? result.topProducts
+  : [result.topProducts];
 
   return (
     <div className="space-y-6">
@@ -46,34 +50,52 @@ export default async function productlist({
           You don&apos;t have permission to access that page.
         </div>
       )}
-{/* 
-      <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-          Your account
-        </h2>
-        <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <dt className="text-xs text-gray-500 dark:text-gray-400">Name</dt>
-            <dd className="text-sm text-gray-900 dark:text-gray-100">
-              {session.user.name ?? "—"}
-            </dd>
+      {!isAdmin&& (
+        <>
+        <div className="flex justify-center ">
+          <div className="max-w-6xl">
+            <Recommend />
           </div>
-          <div>
-            <dt className="text-xs text-gray-500 dark:text-gray-400">Email</dt>
-            <dd className="text-sm text-gray-900 dark:text-gray-100">
-              {session.user.email}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs text-gray-500 dark:text-gray-400">Role</dt>
-            <dd>
-              <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
-                {session.user.role}
-              </span>
-            </dd>
-          </div>
-        </dl>
-      </section> */}
+        </div>
+        <div className="flex text-[neutral-500] text-[25px]">
+          <p>Supported Products. These are highly demanded products in young people.</p>
+        </div>
+        <div className="flex justify-center">
+        <div className="grid grid-cols-3 space-y-5 mt-5 gap-10 max-w-6xl">
+        {products.map((product) =>
+          <article
+              key={product?.id}
+              className="w-[300px] flex flex-row items-stretch overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-md lg:flex-col"
+            >
+              <div className="relative min-w-0 max-lg:w-[40%] max-lg:max-w-[11.5rem] max-lg:shrink-0 max-lg:aspect-[7/11] max-lg:overflow-hidden lg:max-w-none lg:aspect-[16/11]">
+                <ProductCard fileId={product?.id} /> 
+              </div>
+              <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <div>
+                  <p className="pl-5 font-spartan text-2xl font-bold text-blue-600">
+                    ${product?.price}
+                  </p>
+                  <p className="pl-5 text-md text-neutral-500">
+                    · {product?.property}
+                  </p>
+                </div>
+                <h3 className="pt-1 pl-5 truncate text-2xl font-bold leading-snug text-onyx">
+                  {product?.name}
+                </h3>
+                <div className="pt-1 pl-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
+                  <span className="inline-flex items-center gap-1">
+                    {product?.utility}
+                  </span>
+                </div>
+                <div className="flex justify-end items-center gap-3">
+                </div>
+              </div>
+            </article>  
+        )}
+        </div>
+        </div>
+        </>
+      )}
       {isAdmin && (
         <>
         <section className="rounded-xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 interface ProductCardProps {
-  fileId: string;
+  fileId?: string;
 }
 
 export function ProductCard({ fileId }: ProductCardProps) {

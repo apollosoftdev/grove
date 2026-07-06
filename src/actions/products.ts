@@ -103,6 +103,7 @@ export async function deleteProduct(
   formData: FormData
 ):Promise<ProductFormState> {
   const id = formData.get("id") as string;
+
   try {
     await prisma.product.delete({where: { id }});
 
@@ -112,7 +113,6 @@ export async function deleteProduct(
 
     } catch (error) {
       // A successful sign-in throws a NEXT_REDIRECT error which must bubble up.
-      console.log(error);
       if (error) {
         return { error: "Invalid email or password." };
       }

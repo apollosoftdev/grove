@@ -158,10 +158,6 @@ export default function editProductPage({ params }: { params: Promise<{ id: stri
             </div> 
           </article>  
         </form>
-        <form action={deleteAction} className="flex flex-col gap-4" noValidate>
-          <input type="hidden" name="id" value={id} />
-          <SubmitButton pending={deletePending} label="Delete Product" />
-        </form>
       </div>
     </>
   );
