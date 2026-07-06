@@ -22,10 +22,10 @@ export async function SiteHeader() {
                 href="/dashboard"
                 className="font-medium text-[#22C55E] transition hover:text-green-400 dark:text-gray-300 dark:hover:text-white"
               >
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                 <ScrollText className="mr-2 inline-block h-4 w-4" />
                 Dashboard
-                </div>
+                </div> */}
               </Link>
               <LogoutButton />
             </>

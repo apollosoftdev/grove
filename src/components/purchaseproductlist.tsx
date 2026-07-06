@@ -98,7 +98,7 @@ export default function PurchaseProductList({
         </form>
       </div> 
         <table className="w-full text-left text-sm mt-2">
-        <thead className="border-b border-black/10 bg-black/[0.02] text-xs uppercase tracking-wide text-gray-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
+        <thead className="border-b border-black/10 text-xs uppercase tracking-wide bg-[#C8FAD6] text-[#22C55E] dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
             <tr>
             <th className="px-4 py-3 font-medium">No</th>
             <th className="px-4 py-3 font-medium">Image</th>
@@ -134,17 +134,17 @@ export default function PurchaseProductList({
                   {item.product.property ?? "-"}
                 </td>
                 <td className="px-4 py-3">
-                  <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                  <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                     {item.product.utility ?? "-"}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                  <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                     {item.product.price ?? 0}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="inline-flex rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
+                  <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
                     {item.quantity ?? 0}
                   </span>
                 </td>

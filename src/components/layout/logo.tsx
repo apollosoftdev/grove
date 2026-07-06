@@ -21,12 +21,6 @@ export function Logo({ href = "/" }: { href?: string }) {
           grove
         </div>
       </Link>
-      <Link
-        href="/purchase"
-        className="flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
-      >
-        <ShoppingCart className="h-6 w-6 mb-0 text-[#22C55E]" />
-      </Link>
     </div>
    
   );  

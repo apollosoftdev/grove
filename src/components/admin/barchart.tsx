@@ -3,14 +3,14 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
-    { name: 'Product 1', sales: 4000 },
-    { name: 'Product 2', sales: 3000 },
-    { name: 'Product 3', sales: 2500 },
-    { name: 'Product 4', sales: 5000 },
-    { name: 'Product 5', sales: 4400 },
-    { name: 'Product 6', sales: 2400 },
-    { name: 'Product 7', sales: 5600 },
-    { name: 'Product 8', sales: 3400 },
+    { name: 'Electronic', sales: 4000 },
+    { name: 'Soft', sales: 3000 },
+    { name: 'Small', sales: 2500 },
+    { name: 'Intelligent', sales: 5000 },
+    { name: 'Small', sales: 4400 },
+    { name: 'Fantastic', sales: 2400 },
+    { name: 'Luxurious', sales: 5600 },
+    { name: 'Handmade', sales: 3400 },
 ];
 
 export default function SalesBarChart(){

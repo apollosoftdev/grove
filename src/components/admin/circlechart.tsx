@@ -3,9 +3,9 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 const data = [
-    { name: 'Product 1', value: 4000, color: '#84d8a8' },
-    { name: 'Product 2', value: 3000, color: '#ff9f7f' },
-    { name: 'Product 3', value: 2500, color: '#d8c384' },
+    { name: 'Male', value: 4000, color: '#84d8a8' },
+    { name: 'Female', value: 3000, color: '#ff9f7f' },
+    { name: 'Kids', value: 2500, color: '#d8c384' },
 ];
 
 export default function Circlechart(){

@@ -3,7 +3,8 @@
 import { createCommets, type ProductFormState } from "@/actions/products";
 import { useActionState, useEffect, useState } from "react";
 import { Send, StarCheck, MailCheck, PencilLine } from "lucide-react";
-
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { use } from 'react';
 
 const initialState : ProductFormState= {

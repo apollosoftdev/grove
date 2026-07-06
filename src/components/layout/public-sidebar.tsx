@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { dashboardNav } from "@/lib/navigation";
 
 export function PublicSidebar() {
   const pathname = usePathname();
-  const isAdmin = "USER";
+  const isAdmin = false;
   const items = dashboardNav.filter((item) => !item.adminOnly || isAdmin);
 
   return (

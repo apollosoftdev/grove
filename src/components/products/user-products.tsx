@@ -108,7 +108,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
           <Search className="w-4 h-4 mt-1 mr-1 text-gray-500"/>
           <input
             type="text"
-            placeholder="Search for Products ..."
+            placeholder="Search Product Names  ..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="focus-visible focus:outline-none"

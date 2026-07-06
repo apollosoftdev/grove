@@ -1,6 +1,6 @@
 "use client";
 
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, RadialBarChart, RadialBar } from 'recharts';
+import { ResponsiveContainer, Tooltip, Legend, RadialBarChart, RadialBar } from 'recharts';
 
 const data = [
     { name: 'Total income', value: 4000, fill: '#84d8a8' },
@@ -21,7 +21,7 @@ export default function ConcentricChart(){
                     startAngle={180}
                     endAngle={-180}
                 >
-                    <RadialBar background={{ fill: '#f0f0f0' }} dataKey="value" />
+                <RadialBar background={{ fill: '#f0f0f0' }} dataKey="value" />
                 <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc' }} />
                 <Legend iconSize={10} layout = "horizontal" verticalAlign='bottom' align='center'/>
         </RadialBarChart>

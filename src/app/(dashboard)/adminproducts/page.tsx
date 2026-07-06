@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { deleteProduct, type ProductFormState } from "@/actions/products";
-import { NotebookPen, Trash2 } from "lucide-react";                              
+import { NotebookPen, Trash2, Search } from "lucide-react";                              
 import { ProductListImage } from "@/components/products/productlistimage";
 import { useEffect, useState, useActionState,startTransition } from "react";
 
@@ -39,6 +39,8 @@ export default function ProductsListPage() {
 
   const [products, setProducts] = useState<Products[]>([]);;
 
+  const [query, setQuery] = useState("");
+
   useEffect(()=>{
     async function fetchProducts() {
       try {
@@ -66,21 +68,35 @@ export default function ProductsListPage() {
     });
   };
 
+  const searchedProducts = products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase()));
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Products list
-        </h1>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {products.length} registered {products.length === 1 ? "product" : "products"}
-        </p>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Products list
+          </h1>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {products.length} registered {products.length === 1 ? "product" : "products"}
+          </p>
         </div>
+        <div className="flex border border-gray-200 p-2 rounded-lg max-w-[250px] hover:border-green-500 relative left-[60%]">
+          <Search className="w-4 h-4 mt-1 mr-1 text-gray-500"/>
+          <input
+            type="text"
+            placeholder="Search Product Names ..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="focus-visible focus:outline-none"
+          />
+        </div>
+      </div>
 
       <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-black/10 bg-black/[0.02] text-xs uppercase tracking-wide text-gray-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
+            <thead className="border-b border-black/10 text-xs uppercase tracking-wide bg-[#C8FAD6] text-[#22C55E] dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
               <tr>
                 <th className="px-4 py-3 font-medium text-center">No</th>
                 <th className="px-4 py-3 font-medium text-center">Image</th>
@@ -93,7 +109,7 @@ export default function ProductsListPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5 dark:divide-white/5">
-              {products.map((product, index) => (
+              {searchedProducts.map((product, index) => (
                 <tr key={product.id} className="hover:bg-gray-100 ">
                   <td className="px-4 py-3 text-black dark:text-gray-100">
                     <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-white/10 dark:text-gray-200">
