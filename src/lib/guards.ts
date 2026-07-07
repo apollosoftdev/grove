@@ -14,6 +14,14 @@ export async function requireUser() {
   return session;
 }
 
+export async function requirePublicUser() {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/publicproducts");
+  }
+  return session;
+}
+
 export async function requireAdmin() {
   const session = await auth();
   if (!session?.user) {

@@ -1,18 +1,28 @@
 import Link from "next/link";
+import { ShoppingCart, Sprout } from "lucide-react";
 
 export function Logo({ href = "/" }: { href?: string }) {
   return (
-    <Link
-      href={href}
-      className="flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
-    >
-      <span
-        aria-hidden
-        className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-gray-900 text-sm font-bold text-white dark:bg-white dark:text-gray-900"
+    <div className="flex gap-5">
+       <Link
+        href={href}
+        className="flex items-center gap-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
       >
-        g
-      </span>
-      grove
-    </Link>
-  );
+        <div>
+          <Sprout className="h-6 w-6 mb-0 text-[#22C55E]" />
+            <span
+              aria-hidden
+              className="bg-[#22C55E] inline-flex mt-0 h-7 w-7 items-center justify-center rounded-md bg-[#22C55E] text-sm font-bold text-white dark:bg-white dark:text-gray-900"
+            >
+              g
+            </span>
+        </div>
+        <div className="font-bold text-[#22C55E] dark:text-white text-2xl">
+          grove
+        </div>
+      </Link>
+    </div>
+   
+  );  
 }
+  

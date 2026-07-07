@@ -12,7 +12,7 @@ import {
 const initialState: AuthFormState = {};
 
 const fieldClass =
-  "w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/15 dark:bg-white/5 dark:text-gray-100 dark:focus:border-white/30 dark:focus:ring-white/10";
+  "my-5 w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-200 dark:border-white/15 dark:bg-white/5 dark:text-gray-100 dark:focus:border-white/30 dark:focus:ring-white/10";
 
 const labelClass =
   "mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300";
@@ -27,7 +27,7 @@ function SubmitButton({ pending, label }: { pending: boolean; label: string }) {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-md bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+      className="w-[200px] rounded-md bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
     >
       {pending ? "Please wait…" : label}
     </button>
@@ -53,19 +53,17 @@ export function LoginForm({
   const [state, formAction, pending] = useActionState(loginAction, initialState);
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
+    <form action={formAction} className="flex flex-col gap-4 ">
       <input type="hidden" name="callbackUrl" value={callbackUrl ?? "/dashboard"} />
       <FormError message={state.error ?? initialError} />
 
       <div>
-        <label htmlFor="email" className={labelClass}>
-          Email
-        </label>
         <input
           id="email"
           name="email"
           type="email"
           autoComplete="email"
+          placeholder="E-Mail"
           required
           className={fieldClass}
         />
@@ -73,22 +71,20 @@ export function LoginForm({
       </div>
 
       <div>
-        <label htmlFor="password" className={labelClass}>
-          Password
-        </label>
         <input
           id="password"
           name="password"
           type="password"
+          placeholder="PassWord"
           autoComplete="current-password"
           required
           className={fieldClass}
         />
         <FieldError messages={state.fieldErrors?.password} />
       </div>
-
-      <SubmitButton pending={pending} label="Sign in" />
-
+      <div className="flex justify-center">
+        <SubmitButton pending={pending} label="Sign in" />
+      </div>
       <p className="text-center text-sm text-gray-600 dark:text-gray-400">
         Don&apos;t have an account?{" "}
         <Link href="/register" className="font-medium text-gray-900 underline dark:text-white">
@@ -103,62 +99,97 @@ export function RegisterForm() {
   const [state, formAction, pending] = useActionState(registerAction, initialState);
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
+    <form action={formAction} className="gap-4">
       <FormError message={state.error} />
+        <div className="flex justify-evenly">
+          <div>
+            <div>
+              <input
+                id="name"
+                name="name"
+                placeholder="Name"
+                type="text"
+                autoComplete="name"
+                required
+                className={fieldClass}
+              />
+              <FieldError messages={state.fieldErrors?.name} />
+            </div>
 
-      <div>
-        <label htmlFor="name" className={labelClass}>
-          Name
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.name} />
-      </div>
+            <div>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="email"
+                autoComplete="email"
+                required
+                className={fieldClass}
+              />
+              <FieldError messages={state.fieldErrors?.email} />
+            </div>
 
-      <div>
-        <label htmlFor="email" className={labelClass}>
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.email} />
-      </div>
+            <div>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                autoComplete="new-password"
+                required
+                className={fieldClass}
+              />
+              <FieldError messages={state.fieldErrors?.password} />
+            </div>
+          </div>
+            
+          <div>
+            <div>
+              <input
+                id="address"
+                name="address"
+                placeholder="Address"
+                type="text"
+                autoComplete="address"
+                className={fieldClass}
+              />
+              <FieldError messages={state.fieldErrors?.name} />
+            </div>
 
-      <div>
-        <label htmlFor="password" className={labelClass}>
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          required
-          className={fieldClass}
-        />
-        <FieldError messages={state.fieldErrors?.password} />
-      </div>
+            <div>
+              <input
+                id="company"
+                name="company"
+                type="text"
+                placeholder="Company"
+                autoComplete="company"
+                className={fieldClass}
+              />
+              <FieldError messages={state.fieldErrors?.email} />
+            </div>
 
-      <SubmitButton pending={pending} label="Create account" />
-
-      <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-        Already have an account?{" "}
-        <Link href="/login" className="font-medium text-gray-900 underline dark:text-white">
-          Sign in
-        </Link>
-      </p>
+            <div>
+              <input
+                id="phone number"
+                name="phone number"
+                type="text"
+                placeholder="Phone Number"
+                autoComplete="phone-number"
+                className={fieldClass}
+              />
+              <FieldError messages={state.fieldErrors?.password} />
+            </div>
+            </div>
+        </div>
+          <div className="flex justify-center">
+            <SubmitButton pending={pending} label="Create account" />
+          </div>
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-gray-900 underline dark:text-white">
+            Sign in
+          </Link>
+        </p>
     </form>
   );
 }

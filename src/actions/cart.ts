@@ -14,10 +14,11 @@ export async function addToCart(
     _prevState: ActionState,
     formData: FormData
 ): Promise<{ success: boolean, message: string; } | undefined> {
-    console.log(formData);
+
+    const session = await requireUser();
+    const userId = session.user.id;
     try {
-        const session = await requireUser();
-        const userId = session.user.id;
+
 
         if (!userId) {
             return { success: false, message: "User not found!" }
@@ -38,12 +39,9 @@ export async function addToCart(
             })
         }
 
-        const existingItem = await prisma.cartItem.findUnique({
+        const existingItem = await prisma.cartItem.findFirst({
             where: {
-                cartId_productId: {
-                    cartId: carts.id,
-                    productId
-                }
+                productId: productId
             }
         })
 
