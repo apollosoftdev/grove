@@ -3,7 +3,7 @@
 import { useState, useActionState, startTransition } from "react";
 import { ToastContainer, toast } from "react-toastify"; // Add toast
 import "react-toastify/dist/ReactToastify.css"; // Ensure CSS is imported
-import { ProductListImage } from "./products/productlistimage";
+import { ProductListImage } from "./products/productlist-image";
 import { Trash2 } from "lucide-react";
 import { deleteCartItem, type ProductFormState } from "@/actions/products";
 

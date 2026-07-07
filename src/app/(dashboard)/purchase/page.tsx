@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import PurchaseProductList from "@/components/purchaseproductlist";
+import PurchaseProductList from "@/components/purchase-productlist";
 import { requireUser } from "@/lib/guards";
 import { redirect } from "next/navigation";
 

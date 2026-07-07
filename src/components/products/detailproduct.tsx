@@ -4,7 +4,7 @@ import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
 import { ToastContainer, toast } from "react-toastify"; 
 import { HeartPlus } from "lucide-react";
-import { ProductCard } from "./cardshopimage";
+import { ProductCard } from "./cardshop-image";
 
 type Product = {
   id: string;

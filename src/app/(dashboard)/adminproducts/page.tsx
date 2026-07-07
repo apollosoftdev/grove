@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { deleteProduct, type ProductFormState } from "@/actions/products";
 import { NotebookPen, Trash2, Search } from "lucide-react";                              
-import { ProductListImage } from "@/components/products/productlistimage";
+import { ProductListImage } from "@/components/products/productlist-image";
 import { useEffect, useState, useActionState,startTransition } from "react";
 
 type Products = {

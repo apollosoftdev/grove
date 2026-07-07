@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { getTopProducts } from "@/actions/topreview";
 import Recommend from "@/components/products/recommend";
 import { Advertisement } from "@/components/advertisement";
-import { ProductCard } from "@/components/products/cardshopimage";
+import { ProductCard } from "@/components/products/cardshop-image";
 
 export default async function HomePage() {
   // const session = await auth();

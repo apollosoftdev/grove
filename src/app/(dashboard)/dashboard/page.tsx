@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
-import SalesBarChart from "@/components/admin/barchart";
-import SignalLineChart from "@/components/admin/signalchart";
-import Circlechart from "@/components/admin/circlechart";
-import ConcentricChart from "@/components/admin/concentricchart";
+import SalesBarChart from "@/components/admin/bar-chart";
+import SignalLineChart from "@/components/admin/signal-chart";
+import Circlechart from "@/components/admin/circle-chart";
+import ConcentricChart from "@/components/admin/concentric-chart";
 import { getTopProducts } from "@/actions/topreview";
-import { ProductCard } from "@/components/products/cardshopimage";
+import { ProductCard } from "@/components/products/cardshop-image";
 import Recommend from "@/components/products/recommend";
 
 type CartItem = {
