@@ -6,7 +6,6 @@ import { requireUser } from "@/lib/guards";
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { id } from "zod/locales";
 
 export type ProductFormState = {
   error?: string;
@@ -120,7 +119,6 @@ export async function deleteProduct(
     }
 }
 
-<<<<<<< HEAD
 export async function deleteCartItem(
   _prevState: ProductFormState,
   formData: FormData
@@ -142,8 +140,6 @@ export async function deleteCartItem(
       throw error;
     }
 }
-=======
->>>>>>> eb3ca61f0af679394cf7f7d9a7e1b4c85946d204
 
 export async function createCommets(
   _prevState: ProductFormState,
@@ -196,8 +192,60 @@ export async function createCommets(
       }
       throw error;
     }
-<<<<<<< HEAD
 }
-=======
+
+export interface SearchState {
+  results: Array<{ 
+    id:string; 
+    name: string; 
+    property: string; 
+    utility: string | null; 
+    price: number;    
+  }>;
+  currentPage: number;
+  totalPages: number;
+  error?: string;
 }
->>>>>>> eb3ca61f0af679394cf7f7d9a7e1b4c85946d204
+
+const ITEMS_PER_PAGE = 10;
+
+export async function searchProducts( _prevState: SearchState, formData: FormData ) : Promise<SearchState>{
+
+  const query = (formData.get("search") as string)?.trim() || "";
+  const pageInput = formData.get("page") as string;
+  const page = pageInput ? parseInt(pageInput, 5) : 1 ;
+
+  try{
+    const totalItems = await prisma.product.count({
+      where: {
+        name: {
+          contains: query,
+          // mode: 'insensitive',  
+        },
+      },
+    });
+    
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+
+    const currentPage = Math.min(Math.max(1, page), totalPages);
+
+    const data = await prisma.product.findMany({
+      where: {
+        name: {
+          contains: query,
+          // mode: 'insensitive',  
+        },
+      },
+      skip: (currentPage - 1) * ITEMS_PER_PAGE,
+      take:ITEMS_PER_PAGE
+    });
+
+    return { results: data, currentPage, totalPages };
+  }
+
+  catch (error){
+     console.error("Prisma Search Error Details:", error); 
+    
+    return { ..._prevState, error: "Something went wrong with the database search."}
+  }
+}

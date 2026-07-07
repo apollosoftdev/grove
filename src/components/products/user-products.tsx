@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useActionState, useState, useEffect, useRef } from "react";
 import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
-<<<<<<< HEAD
 import DetailProduct from "@/components/products/detailproduct";
 import { MessageSquareText, HeartPlus, Search } from "lucide-react";
 import ProductDropdown from "../productdropdown";
@@ -12,9 +11,10 @@ import AmountSlider from "../slider";
 import { ProductCard } from "./cardshopimage";
 import Pagination from "../pagination";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { searchProducts, SearchState } from "@/actions/products";
+import { useDebouncedCallback } from "use-debounce";
 
-=======
->>>>>>> eb3ca61f0af679394cf7f7d9a7e1b4c85946d204
+
 // 1. Define the shape of a single product
 type Product = {
   id: string;
@@ -49,14 +49,18 @@ const addToCartAction = async (
   return result ?? prevState;
 };
 
+const initialSearchState : SearchState = {
+  results: [],
+  currentPage: 1,
+  totalPages: 1,
+}  
+
 export default function UserProductsPage({ products }: ProductListProps) {
 
   const [state, formAction, ispending] = useActionState(addToCartAction, initialstate);
   const [detail, setDetail] = useState<Product>(initialDetailState);
-  const [query, setQuery] = useState("");
   const [option, setOption] = useState("");
-  const [value, setValue] = useState(500);
-  const [page, setPage] = useState(1);
+  const [value, setValue] = useState(500);  
 
   const handleSelectProduct = (product: Product) => {
     setDetail({
@@ -83,39 +87,65 @@ export default function UserProductsPage({ products }: ProductListProps) {
     setPage(page)
   }
 
-  const searchedProducts = products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase()));
+  const [ searchedItems, searchProductsAction, isPending] = useActionState(searchProducts, initialSearchState);
 
-  const optionSearchProducts =  searchedProducts.filter((product) => product.property.toLowerCase().includes(option.toLowerCase()));
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const debouncedSubmit = useDebouncedCallback(() => {
+    setPage(1);
+    if(formRef.current){
+      formRef.current.requestSubmit();
+    }
+  }, 300)
+
+  useEffect(() => {
+    if(formRef.current){
+      formRef.current.requestSubmit();
+    }
+  }, [page]);
+
+  const optionSearchProducts =  searchedItems.results.filter((product) => product.property.toLowerCase().includes(option.toLowerCase()));
 
   const maxPriceProducts =  optionSearchProducts.filter((product) => product.price < value);
 
-  const limit = 10; 
-  const startIndex = (page - 1) * limit;
-  const endIndex = startIndex + limit;
-  const pageProducts = maxPriceProducts.slice(startIndex, endIndex);
 
+  // console.log(searchedItems.results);
   return (
     <div className="space-y-3">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
         Products list
         </h1>
-          {maxPriceProducts &&
+          {searchedItems.results &&
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {maxPriceProducts.length} registered {maxPriceProducts.length === 1 ? "product" : "products"}
+              {searchedItems.results.length} registered {maxPriceProducts.length === 1 ? "product" : "products"}
             </p>
           }
       </div>
       <div className="flex gap-3">
         <div className="flex border border-gray-200 p-2 rounded-lg max-w-[250px] hover:border-green-500">
           <Search className="w-4 h-4 mt-1 mr-1 text-gray-500"/>
-          <input
-            type="text"
-            placeholder="Search Product Names  ..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="focus-visible focus:outline-none"
-          />
+          <form ref={formRef} action={searchProductsAction}>
+            <input type="hidden" name="page" value={page} />
+            <input
+              name="search"
+              type="text"
+              placeholder="Search Product Names  ..."
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); debouncedSubmit()}}
+              className="focus-visible focus:outline-none"
+            />
+          </form>
+          {/* <input
+              type="text"
+              placeholder="Search Product Names  ..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="focus-visible focus:outline-none"
+            /> */}
         </div>
         <div className="flex max-w-[250px]">
           <ProductDropdown onSelectProduct={handleDropDownChange} />
@@ -124,22 +154,22 @@ export default function UserProductsPage({ products }: ProductListProps) {
           <AmountSlider onChange={handlePriceChange}/>
         </div>
         <div className="flex gap-3">
-          {page > 0 && page <= 5 ? (
+          {searchedItems.results.length > 0 && (
             <>
-            <div className="flex justify-center items-center">Product NO: {startIndex} ~ {endIndex}</div>
+            <div className="flex justify-center items-center">Product NO: {searchedItems.currentPage} of {searchedItems.totalPages}</div>
               <div>
                 <button 
                   className={`w-full flex justify-between items-center px-4 py-3 bg-white border p-2 rounded-lg border-gray-300 rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===1 ? 'cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
-                  onClick={() => setPage(page-1)}
-                  disabled={page === 1}
+                  onClick={() => setPage((prev) => prev-1)}
+                  disabled={searchedItems.currentPage <= 1 || isPending}
                   type="button"
                   >
                   <ChevronLeft className="w-5 h-5 text-gray-700"/>
                 </button>
               </div>
-              <div>
+              {/* <div>
                 <Pagination onChange={handlePageChange}/>
-              </div>
+              </div> */}
               <div>
                 <button 
                   className={`w-full flex justify-between items-center px-4 py-3 bg-white border p-2 rounded-lg border-gray-300 rounded-md text-[15px] text-left cursor-pointer transition-all duration-200 outline-non ${page ===5 ? 'cursor-not-allowed text-gray-500' : 'hover:border-green-500'}`}
@@ -151,7 +181,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
                 </button>
               </div>
             </>
-        ):null}
+        )}
       </div>
       </div>
       <div className="mt-8 z-50"> 
@@ -165,7 +195,7 @@ export default function UserProductsPage({ products }: ProductListProps) {
       </div>
       <div className="rounded-xl bg-white shadow-sm dark:bg-white/5">
         <div className="grid lg:grid-cols-5 space-y-5 gap-10 md:grid-cols-3">
-          {pageProducts.map((product) => (
+          {maxPriceProducts.map((product) => (
               <article
                 key={product.id}
                 className="w-[250px] flex flex-row items-stretch overflow-hidden border border-black/10 rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-3 hover:shadow-md lg:flex-col"
