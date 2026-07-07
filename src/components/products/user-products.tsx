@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState, useState, useEffect, useRef } from "react";
 import { addToCart } from "@/actions/cart";
 import { type ActionState } from "@/actions/cart";
+<<<<<<< HEAD
 import DetailProduct from "@/components/products/detailproduct";
 import { MessageSquareText, HeartPlus, Search } from "lucide-react";
 import ProductDropdown from "../productdropdown";
@@ -12,6 +13,8 @@ import { ProductCard } from "./cardshopimage";
 import Pagination from "../pagination";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
+=======
+>>>>>>> eb3ca61f0af679394cf7f7d9a7e1b4c85946d204
 // 1. Define the shape of a single product
 type Product = {
   id: string;

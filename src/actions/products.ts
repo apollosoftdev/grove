@@ -120,6 +120,7 @@ export async function deleteProduct(
     }
 }
 
+<<<<<<< HEAD
 export async function deleteCartItem(
   _prevState: ProductFormState,
   formData: FormData
@@ -141,6 +142,8 @@ export async function deleteCartItem(
       throw error;
     }
 }
+=======
+>>>>>>> eb3ca61f0af679394cf7f7d9a7e1b4c85946d204
 
 export async function createCommets(
   _prevState: ProductFormState,
@@ -193,4 +196,8 @@ export async function createCommets(
       }
       throw error;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> eb3ca61f0af679394cf7f7d9a7e1b4c85946d204
